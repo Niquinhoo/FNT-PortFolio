@@ -1,0 +1,102 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+:root {
+  --surface: #FBFBFA;
+}
+
+body {
+  background-color: var(--surface);
+  color: #111111;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Minimalist selection */
+::selection {
+  background-color: #FDEBEC;
+  color: #9F2F2D;
+}
+
+/* Liquid glass effect - refined for minimalism */
+.liquid-glass {
+  background: rgba(251, 251, 250, 0.7);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.matte-surface {
+  background-color: #FBFBFA;
+  /* subtle noise/texture pattern could go here, removing heavy image for now */
+}
+
+/* Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* View Transitions */
+::view-transition-old(root) {
+  animation: none;
+  opacity: 0;
+}
+
+::view-transition-new(root) {
+  animation: none;
+  opacity: 1;
+}
+
+::view-transition-group(*) {
+  animation-duration: 500ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 99999;
+}
+
+/* Remove crossfade (which looks like blur) from all transforming elements */
+::view-transition-old(*) {
+  animation: none;
+  opacity: 0;
+  mix-blend-mode: normal;
+}
+::view-transition-new(*) {
+  animation: none;
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+
+/* We'll handle the backdrop blur and opacity via standard CSS transitions in the component 
+   to avoid any "strange blur" artifacts during the View Transition snapshots. */
+::view-transition-old(modal-backdrop),
+::view-transition-new(modal-backdrop) {
+  animation: none;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shake-calendar {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(45deg); }
+  75% { transform: rotate(-45deg); }
+}
+
+@keyframes rocket-launch {
+  0% { transform: translate(0, 0) rotate(45deg); opacity: 1; }
+  30% { transform: translate(30px, -30px) rotate(45deg); opacity: 0; }
+  31% { transform: translate(-30px, 30px) rotate(45deg); opacity: 0; }
+  100% { transform: translate(0, 0) rotate(45deg); opacity: 1; }
+}
+
