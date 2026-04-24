@@ -58,7 +58,7 @@ const TypingLogo = () => {
   }, [displayText, phase]);
 
   return (
-    <div className="flex items-center gap-0.5 font-headline font-bold text-2xl tracking-tighter relative">
+    <div className="flex items-center gap-0.5 font-headline font-bold text-2xl tracking-tighter relative pr-8 md:pr-16 lg:pr-24">
       {/* Hidden spacer to reserve width */}
       <span className="opacity-0 pointer-events-none select-none h-0 md:h-auto overflow-hidden">
         {fullText}
@@ -82,7 +82,7 @@ const Navbar = () => {
   const { scrollYProgress } = useScroll();
   
   // Progress value for the conic gradient border
-  const progressPercent = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const progressPercent = useTransform(scrollYProgress, [0, 0.9], ["0%", "100%"]);
   
   // Transform the scroll position into a glowing shadow
   const boxShadow = useTransform(
@@ -119,8 +119,7 @@ const Navbar = () => {
         {[
           { name: 'Proyectos', href: '#work' },
           { name: 'Habilidades', href: '#process' },
-          { name: 'Sobre Mí', href: '#about' },
-          { name: 'Contacto', href: '#contact' }
+          { name: 'Sobre Mí', href: '#about' }
         ].map((item, idx) => (
           <a 
             key={item.name}
@@ -132,11 +131,13 @@ const Navbar = () => {
         ))}
       </div>
 
-      <div className="flex items-center gap-4 relative z-10">
-        <button className="hidden sm:block text-xs font-label uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Resume</button>
-        <button className="bg-primary text-on-primary px-8 py-2.5 text-xs font-label uppercase tracking-[0.2em] hover:bg-on-surface hover:text-surface transition-all duration-500 rounded-full shadow-md hover:shadow-primary/20">
-          Get in touch
-        </button>
+      <div className="flex items-center relative z-10">
+        <a 
+          href="#contact"
+          className="bg-primary text-on-primary px-8 py-2.5 text-xs font-label uppercase tracking-[0.2em] hover:bg-on-surface hover:text-surface transition-all duration-500 rounded-full shadow-md hover:shadow-primary/20"
+        >
+          Contacto
+        </a>
       </div>
     </motion.nav>
   );

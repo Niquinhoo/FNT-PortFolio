@@ -41,6 +41,27 @@ const ProjectIcon = ({ title, hasHovered }) => {
   return <span className="w-1.5 h-1.5 rounded-full bg-secondary group-hover:scale-150 transition-transform duration-300"></span>;
 };
 
+const BorderTrail = ({ radius = 24, isHovered }) => {
+  if (!isHovered) return null;
+  
+  return (
+    <>
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500%] aspect-square z-0 pointer-events-none"
+        style={{
+          background: `conic-gradient(from 0deg, transparent 175deg, #D90429 175deg, #D90429 180deg, transparent 180deg, transparent 355deg, #D90429 355deg)`
+        }}
+      />
+      <div 
+        className="absolute inset-[2px] bg-surface-container z-0 pointer-events-none" 
+        style={{ borderRadius: `calc(${radius}px - 2px)` }}
+      />
+    </>
+  );
+};
+
 const transforms = [
   { x: "-38vw", y: "12vh", rotate: -12, zIndex: 10 },
   { x: "-19vw", y: "4vh", rotate: -6, zIndex: 20 },
@@ -69,32 +90,52 @@ const FeaturedCard = ({ project, index, scrollYProgress, onClick, selectedProjec
         zIndex: config.zIndex,
         transformOrigin: "center center" 
       }}
+      whileHover={{ zIndex: 40, scale: 1.02 }}
+      transition={{ 
+        zIndex: { duration: 0 },
+        scale: { type: "spring", stiffness: 300, damping: 20 }
+      }}
     >
       <div 
         onClick={() => onClick(project)}
         onMouseEnter={() => setHasHovered(true)}
+        onMouseLeave={() => setHasHovered(false)}
         style={{ viewTransitionName: getName('project-card') }}
-        className="w-full h-full border border-outline bg-surface-container rounded-3xl p-5 md:p-6 flex flex-col group shadow-2xl cursor-pointer"
+        className="w-full h-full bg-surface-container rounded-3xl flex flex-col group shadow-2xl cursor-pointer relative overflow-hidden border border-outline"
       >
-        <div className="relative mb-6">
-          <div 
-            style={{ viewTransitionName: getName('project-image-container') }}
-            className="w-full aspect-[4/3] overflow-hidden rounded-2xl bg-surface border border-outline relative"
-          >
-            <img 
-              style={{ viewTransitionName: getName('project-image') }}
-              src={project.desktopImg} 
-              alt={project.title}
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-            />
+        <BorderTrail radius={24} isHovered={hasHovered} />
+        
+        <div className="relative z-10 p-5 md:p-6 flex flex-col h-full">
+          <div className="relative mb-6">
+            <div 
+              style={{ viewTransitionName: getName('project-image-container') }}
+              className="w-full aspect-[4/3] overflow-hidden rounded-2xl bg-surface border border-outline relative"
+            >
+            {project.previewVideo ? (
+              <video 
+                style={{ viewTransitionName: getName('project-image') }}
+                src={project.previewVideo}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              />
+            ) : (
+              <img 
+                style={{ viewTransitionName: getName('project-image') }}
+                src={project.desktopImg} 
+                alt={project.title}
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              />
+            )}
           </div>
-          {/* Decorative circle matching the reference aesthetic */}
           <div className="absolute -bottom-3 right-4 w-10 h-10 md:w-12 md:h-12 bg-surface-container rounded-full border border-outline flex items-center justify-center shadow-lg overflow-hidden z-50">
             <ProjectIcon title={project.title} hasHovered={hasHovered} />
           </div>
         </div>
         
-        <div className="px-2 flex flex-col flex-grow">
+        <div className="px-2 flex flex-col flex-grow relative z-10">
           <span className="text-[10px] text-secondary font-label tracking-widest uppercase mb-3">0{index + 1} // {project.tags[0]}</span>
           <h4 
             style={{ viewTransitionName: getName('project-title') }}
@@ -110,6 +151,7 @@ const FeaturedCard = ({ project, index, scrollYProgress, onClick, selectedProjec
           </div>
           <div className="w-full h-[1px] bg-outline mt-auto mb-2"></div>
         </div>
+        </div>
       </div>
     </motion.div>
   );
@@ -124,20 +166,36 @@ const SideProjectCard = ({ project, activeTransitionId, selectedProject, onClick
     <div 
       onClick={() => onClick(project)}
       onMouseEnter={() => setHasHovered(true)}
+      onMouseLeave={() => setHasHovered(false)}
       style={{ viewTransitionName: getName('project-card') }}
-      className="border border-outline bg-surface-container rounded-2xl p-6 flex flex-col group hover:border-secondary cursor-pointer transition-colors duration-300 shadow-md relative"
+      className="border border-outline bg-surface-container rounded-2xl flex flex-col group hover:border-secondary cursor-pointer transition-all duration-300 shadow-md relative hover:z-40 hover:shadow-xl hover:shadow-secondary/10 hover:scale-[1.02] overflow-hidden"
     >
-      <div className="relative mb-6">
-        <div 
-          style={{ viewTransitionName: getName('project-image-container') }}
-          className="w-full aspect-video overflow-hidden rounded-xl bg-surface border border-outline relative"
-        >
-          <img 
-            style={{ viewTransitionName: getName('project-image') }}
-            src={project.desktopImg} 
-            alt={project.title}
-            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-          />
+      <BorderTrail radius={16} isHovered={hasHovered} />
+      
+      <div className="relative z-10 p-6 flex flex-col h-full">
+        <div className="relative mb-6">
+          <div 
+            style={{ viewTransitionName: getName('project-image-container') }}
+            className="w-full aspect-video overflow-hidden rounded-xl bg-surface border border-outline relative"
+          >
+          {project.previewVideo ? (
+            <video 
+              style={{ viewTransitionName: getName('project-image') }}
+              src={project.previewVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+            />
+          ) : (
+            <img 
+              style={{ viewTransitionName: getName('project-image') }}
+              src={project.desktopImg} 
+              alt={project.title}
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+            />
+          )}
         </div>
         {/* Decorator for side projects */}
         <div className="absolute -bottom-3 right-4 w-10 h-10 md:w-12 md:h-12 bg-surface-container rounded-full border border-outline flex items-center justify-center shadow-lg overflow-hidden z-50">
@@ -163,6 +221,7 @@ const SideProjectCard = ({ project, activeTransitionId, selectedProject, onClick
           </span>
         ))}
       </div>
+      </div>
     </div>
   );
 };
@@ -172,6 +231,7 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalReady, setIsModalReady] = useState(false);
   const [activeTransitionId, setActiveTransitionId] = useState(null);
+  const [currentGalleryIndex, setCurrentGalleryIndex] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -192,6 +252,7 @@ const Projects = () => {
     const transition = document.startViewTransition(() => {
       flushSync(() => {
         setSelectedProject(project);
+        setCurrentGalleryIndex(0);
         setIsModalReady(false); // Mount transparent
       });
     });
@@ -249,9 +310,10 @@ const Projects = () => {
   }, [selectedProject]);
 
   return (
-    <section className="bg-surface relative" id="work">
+    <section className="bg-surface relative">
       {/* The Scroll Animation Section */}
       <div ref={containerRef} className="relative h-[400vh] w-full border-b border-outline">
+        <div id="work" className="absolute top-[300vh]" />
         <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
           
           <div className="absolute top-24 w-full px-8 max-w-7xl mx-auto left-0 right-0 z-40 pointer-events-none">
@@ -317,11 +379,11 @@ const Projects = () => {
           
           <div
             style={{ viewTransitionName: `project-card-${selectedProject.id}` }}
-            className="w-full max-w-6xl bg-surface-container border border-outline rounded-[2rem] overflow-hidden shadow-2xl flex flex-col md:flex-row h-full max-h-[85vh] md:max-h-[80vh] relative z-10 pointer-events-auto"
+            className="w-full max-w-[95vw] xl:max-w-[1400px] bg-surface-container border border-outline rounded-[2rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row h-full max-h-[85vh] lg:max-h-[85vh] relative z-10 pointer-events-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Left/Center Section: Text */}
-            <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col overflow-y-auto">
+            <div className="w-full lg:w-[40%] xl:w-[35%] p-8 lg:p-16 flex flex-col overflow-y-auto">
               <button 
                 onClick={handleCloseModal}
                 className="self-start mb-12 flex items-center gap-3 text-secondary hover:text-on-surface transition-colors group"
@@ -361,17 +423,78 @@ const Projects = () => {
             </div>
             
             {/* Right Section: Media */}
-            <div className="w-full md:w-1/2 bg-surface relative min-h-[300px] border-t md:border-t-0 md:border-l border-outline p-4 md:p-8 flex items-center justify-center">
+            <div className="w-full lg:w-[60%] xl:w-[65%] bg-surface relative min-h-[300px] border-t lg:border-t-0 lg:border-l border-outline p-4 lg:p-8 flex items-center justify-center">
               <div 
                 style={{ viewTransitionName: `project-image-container-${selectedProject.id}` }}
-                className="w-full h-full rounded-2xl overflow-hidden border border-outline relative"
+                className="w-full h-full rounded-2xl overflow-hidden border border-outline relative group bg-surface-container flex items-center justify-center"
               >
-                <img 
-                  style={{ viewTransitionName: `project-image-${selectedProject.id}` }}
-                  src={selectedProject.desktopImg} 
-                  alt={selectedProject.title}
-                  className="w-full h-full object-cover"
-                />
+                {selectedProject.gallery && selectedProject.gallery.length > 0 ? (
+                  <>
+                    <img 
+                      style={{ viewTransitionName: `project-image-${selectedProject.id}` }}
+                      src={selectedProject.gallery[currentGalleryIndex]} 
+                      alt={`${selectedProject.title} gallery ${currentGalleryIndex + 1}`}
+                      className="w-full h-full object-contain"
+                    />
+                    {/* Carousel Controls */}
+                    {selectedProject.gallery.length > 1 && (
+                      <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
+                        {selectedProject.gallery.map((_, idx) => (
+                          <button
+                            key={idx}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setCurrentGalleryIndex(idx);
+                            }}
+                            className={`w-2 h-2 rounded-full transition-all ${
+                              idx === currentGalleryIndex ? 'bg-secondary w-6' : 'bg-white/50 hover:bg-white'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    )}
+                    {/* Next/Prev Buttons */}
+                    {selectedProject.gallery.length > 1 && (
+                      <>
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setCurrentGalleryIndex(prev => prev === 0 ? selectedProject.gallery.length - 1 : prev - 1);
+                          }}
+                          className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-md hover:bg-black/60"
+                        >
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                        </button>
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setCurrentGalleryIndex(prev => prev === selectedProject.gallery.length - 1 ? 0 : prev + 1);
+                          }}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-md hover:bg-black/60"
+                        >
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                        </button>
+                      </>
+                    )}
+                  </>
+                ) : selectedProject.previewVideo ? (
+                  <video 
+                    style={{ viewTransitionName: `project-image-${selectedProject.id}` }}
+                    src={selectedProject.previewVideo} 
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <img 
+                    style={{ viewTransitionName: `project-image-${selectedProject.id}` }}
+                    src={selectedProject.desktopImg} 
+                    alt={selectedProject.title}
+                    className="w-full h-full object-contain"
+                  />
+                )}
               </div>
             </div>
           </div>
