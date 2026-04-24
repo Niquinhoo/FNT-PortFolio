@@ -16,9 +16,12 @@ const Hero = () => {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className="max-w-4xl space-y-10 relative z-10"
       >
-        <p className="font-label text-xs md:text-sm uppercase tracking-[0.4em] text-on-surface-variant/80">
-          Available for new opportunities — 2024
-        </p>
+        <div className="flex items-center justify-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+          <p className="font-label text-xs md:text-sm uppercase tracking-[0.4em] text-on-surface-variant/80">
+            Disponible para nuevas oportunidades - 2026
+          </p>
+        </div>
         
         <div className="space-y-4">
           <h1 className="font-headline text-7xl md:text-9xl font-black tracking-tight text-on-surface leading-[0.9]">

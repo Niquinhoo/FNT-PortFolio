@@ -255,8 +255,8 @@ const Projects = () => {
         <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
           
           <div className="absolute top-24 w-full px-8 max-w-7xl mx-auto left-0 right-0 z-40 pointer-events-none">
-            <span className="font-label text-xs uppercase tracking-widest text-secondary">01 — Selection</span>
-            <h3 className="font-headline text-5xl font-bold mt-2 text-on-surface">Featured Works</h3>
+            <span className="font-label text-xs uppercase tracking-widest text-secondary">01 — Producción</span>
+            <h3 className="font-headline text-5xl font-bold mt-2 text-on-surface">Soluciones que llegaron a producción</h3>
           </div>
 
           <div className="relative w-[80vw] max-w-[320px] md:max-w-[380px] h-[480px] md:h-[560px] mt-12 md:mt-16">
@@ -288,8 +288,8 @@ const Projects = () => {
       <div className="py-32 border-b border-outline">
         <div className="max-w-7xl mx-auto px-8">
           <div className="mb-16">
-            <span className="font-label text-xs uppercase tracking-widest text-secondary">02 — Creative Lab</span>
-            <h3 className="font-headline text-4xl font-bold mt-2 text-on-surface">Side Projects & Tools</h3>
+            <span className="font-label text-xs uppercase tracking-widest text-secondary">02 — Creative Lab & Side Proyects</span>
+            <h3 className="font-headline text-4xl font-bold mt-2 text-on-surface">Juegos y Herramientas</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
