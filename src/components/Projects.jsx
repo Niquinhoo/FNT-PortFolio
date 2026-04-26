@@ -51,7 +51,7 @@ const BorderTrail = ({ radius = 24, isHovered }) => {
         transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500%] aspect-square z-0 pointer-events-none"
         style={{
-          background: `conic-gradient(from 0deg, transparent 175deg, #D90429 175deg, #D90429 180deg, transparent 180deg, transparent 355deg, #D90429 355deg)`
+          background: `conic-gradient(from 0deg, transparent 135deg, #D90429 180deg, transparent 180deg, transparent 315deg, #D90429 360deg)`
         }}
       />
       <div 
