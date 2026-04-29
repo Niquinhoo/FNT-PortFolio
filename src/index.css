@@ -94,9 +94,20 @@ html {
 }
 
 @keyframes rocket-launch {
-  0% { transform: translate(0, 0) rotate(45deg); opacity: 1; }
-  30% { transform: translate(30px, -30px) rotate(45deg); opacity: 0; }
-  31% { transform: translate(-30px, 30px) rotate(45deg); opacity: 0; }
-  100% { transform: translate(0, 0) rotate(45deg); opacity: 1; }
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  40% { transform: translate(50px, -50px) scale(0.5); opacity: 0; }
+  60% { transform: translate(-50px, 50px) scale(0.5); opacity: 0; }
+  100% { transform: translate(0, 0) scale(1); opacity: 1; }
+}
+
+@keyframes rotate-360 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes shake-chips {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  75% { transform: rotate(-15deg); }
 }
 

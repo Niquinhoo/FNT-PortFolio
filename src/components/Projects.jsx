@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { flushSync } from 'react-dom';
 import { featuredProjects, sideProjects } from '../data/projectsData';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Calendar, ShoppingCart, CloudRain, Rocket } from 'lucide-react';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import { createTimeline } from 'animejs';
+import { Calendar, ShoppingCart, CloudRain, Rocket, Banknote, Dices, UserSearch } from 'lucide-react';
 
 const FootballIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -34,7 +35,16 @@ const ProjectIcon = ({ title, hasHovered }) => {
     return <CloudRain className="w-5 h-5 text-secondary transition-colors duration-300 group-hover:text-blue-400 group-hover:fill-blue-400/20" />;
   }
   if (title.includes('LaunchUI')) {
-    return <Rocket className="w-5 h-5 text-secondary rotate-45 group-hover:animate-[rocket-launch_1s_ease-in-out]" />;
+    return <Rocket className="w-5 h-5 text-secondary transition-all duration-300 group-hover:animate-[rocket-launch_1.5s_ease-in-out]" />;
+  }
+  if (title.includes('SplitIt')) {
+    return <Banknote className="w-5 h-5 text-secondary transition-all duration-300 group-hover:animate-[rotate-360_0.7s_ease-in-out]" />;
+  }
+  if (title.includes('HPoker')) {
+    return <Dices className="w-5 h-5 text-secondary group-hover:animate-[shake-chips_0.5s_ease-in-out]" />;
+  }
+  if (title.includes('VMImpostor')) {
+    return <UserSearch className="w-5 h-5 text-secondary group-hover:scale-110 transition-transform duration-300" />;
   }
 
   // Fallback for side projects
@@ -228,6 +238,9 @@ const SideProjectCard = ({ project, activeTransitionId, selectedProject, onClick
 
 const Projects = () => {
   const containerRef = useRef(null);
+  const bgRef = useRef(null);
+  const textRef = useRef(null);
+  const animeTimeline = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalReady, setIsModalReady] = useState(false);
   const [activeTransitionId, setActiveTransitionId] = useState(null);
@@ -236,6 +249,34 @@ const Projects = () => {
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
+  });
+
+  useEffect(() => {
+    animeTimeline.current = createTimeline({
+      autoplay: false,
+      duration: 1000,
+      easing: 'linear'
+    });
+
+    animeTimeline.current
+      .add({
+        targets: bgRef.current,
+        opacity: [0, 1],
+        duration: 300,
+      }, 0)
+      .add({
+        targets: textRef.current,
+        translateY: ['-50%', '0%'],
+        scale: [0.8, 3],
+        opacity: [0, 0.15],
+        duration: 1000,
+      }, 0);
+  }, []);
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (animeTimeline.current) {
+      animeTimeline.current.seek(animeTimeline.current.duration * latest);
+    }
   });
 
   const handleSelectProject = (project) => {
@@ -316,6 +357,20 @@ const Projects = () => {
         <div id="work" className="absolute top-[300vh]" />
         <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
           
+          {/* Animated Background */}
+          <div 
+            ref={bgRef}
+            className="absolute inset-0 w-full h-full bg-[#D90429] opacity-0 pointer-events-none flex items-center justify-center overflow-hidden z-0"
+          >
+            <div 
+              ref={textRef}
+              className="font-headline font-black text-white whitespace-nowrap opacity-0"
+              style={{ fontSize: '15vw', transformOrigin: 'center center' }}
+            >
+              PROYECTOS
+            </div>
+          </div>
+
           <div className="absolute top-24 w-full px-8 max-w-7xl mx-auto left-0 right-0 z-40 pointer-events-none">
             <span className="font-label text-xs uppercase tracking-widest text-secondary">01 — Producción</span>
             <h3 className="font-headline text-5xl font-bold mt-2 text-on-surface">Soluciones que llegaron a producción</h3>
