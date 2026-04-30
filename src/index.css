@@ -3,12 +3,46 @@
 
 :root {
   --surface: #FBFBFA;
-  --text: #111111;
+  --surface-dim: #F7F6F3;
+  --surface-bright: #FFFFFF;
+  --surface-container: #FFFFFF;
+  --surface-container-high: #F9F9F8;
+  --surface-container-highest: #F2F2F2;
+  --on-surface: #111111;
+  --on-surface-variant: #787774;
+  --primary: #D90429;
+  --on-primary: #FFFFFF;
+  --primary-container: #FDEBEC;
+  --on-primary-container: #9F2F2D;
+  --secondary: #8D021F;
+  --on-secondary: #FFFFFF;
+  --outline: #EAEAEA;
+  --outline-variant: rgba(0,0,0,0.06);
+  --blueprint-grid: #D6CFC4;
+  --blueprint-stroke: #B8AE9D;
+  --blueprint-blob: #D90429;
 }
 
 .dark {
   --surface: #0a0a0a;
-  --text: #f0f0f0;
+  --surface-dim: #111111;
+  --surface-bright: #1a1a1a;
+  --surface-container: #151515;
+  --surface-container-high: #1e1e1e;
+  --surface-container-highest: #2a2a2a;
+  --on-surface: #f0f0f0;
+  --on-surface-variant: #a0a0a0;
+  --primary: #FF1A3D; /* Slightly brighter red for dark mode */
+  --on-primary: #FFFFFF;
+  --primary-container: #3d000a;
+  --on-primary-container: #ffdad6;
+  --secondary: #D90429;
+  --on-secondary: #FFFFFF;
+  --outline: #333333;
+  --outline-variant: rgba(255,255,255,0.1);
+  --blueprint-grid: #2a2a2a;
+  --blueprint-stroke: #444444;
+  --blueprint-blob: #FF1A3D;
 }
 
 * {
@@ -17,7 +51,7 @@
 
 body {
   background-color: var(--surface);
-  color: var(--text);
+  color: var(--on-surface);
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.6;
 }

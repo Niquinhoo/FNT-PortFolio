@@ -9,54 +9,45 @@ export default {
     extend: {
       "colors": {
         // Core Cream/Bone White background
-        "surface": "#FBFBFA",
-        "surface-dim": "#F7F6F3",
-        "surface-bright": "#FFFFFF",
+        "surface": "var(--surface)",
+        "surface-dim": "var(--surface-dim)",
+        "surface-bright": "var(--surface-bright)",
         
-        // Cards and inner surfaces (Pure white)
-        "surface-container-lowest": "#FFFFFF",
-        "surface-container-low": "#FFFFFF",
-        "surface-container": "#FFFFFF",
-        "surface-container-high": "#F9F9F8",
-        "surface-container-highest": "#F2F2F2",
-        "surface-variant": "#F9F9F8",
+        // Cards and inner surfaces
+        "surface-container-lowest": "var(--surface-bright)",
+        "surface-container-low": "var(--surface-container)",
+        "surface-container": "var(--surface-container)",
+        "surface-container-high": "var(--surface-container-high)",
+        "surface-container-highest": "var(--surface-container-highest)",
+        "surface-variant": "var(--surface-container-high)",
         
-        // Text (Off-black and muted grays)
-        "on-surface": "#111111",
-        "on-surface-variant": "#787774",
-        "on-background": "#111111",
+        // Text
+        "on-surface": "var(--on-surface)",
+        "on-surface-variant": "var(--on-surface-variant)",
+        "on-background": "var(--on-surface)",
         
         // Red Accent (Rojo)
-        "primary": "#D90429",
-        "on-primary": "#FFFFFF",
-        "primary-container": "#FDEBEC", // Pale Red
-        "on-primary-container": "#9F2F2D", // Text on Pale Red
-        "primary-fixed": "#FDEBEC",
-        "primary-fixed-dim": "#FAD4D6",
-        "on-primary-fixed": "#9F2F2D",
-        "on-primary-fixed-variant": "#7A1C1A",
+        "primary": "var(--primary)",
+        "on-primary": "var(--on-primary)",
+        "primary-container": "var(--primary-container)",
+        "on-primary-container": "var(--on-primary-container)",
         
-        // Dark Red Accent (Replacing Orange)
-        "secondary": "#8D021F",
-        "on-secondary": "#FFFFFF",
-        "secondary-container": "#FDEBEC", // Pale Red
-        "on-secondary-container": "#8D021F", // Text on Pale Red
-        "secondary-fixed": "#FDEBEC",
-        "secondary-fixed-dim": "#FAD4D6",
-        "on-secondary-fixed": "#8D021F",
+        // Dark Red Accent
+        "secondary": "var(--secondary)",
+        "on-secondary": "var(--on-secondary)",
+        "secondary-container": "var(--primary-container)",
+        "on-secondary-container": "var(--secondary)",
         
         // Muted/Tertiary
-        "tertiary": "#787774",
-        "on-tertiary": "#FFFFFF",
-        "tertiary-container": "#F2F2F2",
-        "on-tertiary-container": "#111111",
+        "tertiary": "var(--on-surface-variant)",
+        "on-tertiary": "var(--surface)",
         
-        // Borders (Ultra-light gray)
-        "outline": "#EAEAEA",
-        "outline-variant": "rgba(0,0,0,0.06)",
+        // Borders
+        "outline": "var(--outline)",
+        "outline-variant": "var(--outline-variant)",
         
         // Background
-        "background": "#FBFBFA",
+        "background": "var(--surface)",
         
         // Error
         "error": "#ba1a1a",

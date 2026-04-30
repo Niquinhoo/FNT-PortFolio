@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-[#F5F2EB] text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen relative">
+    <div className="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen relative transition-colors duration-500">
       <BlueprintBackground isGlobal={true} />
       <div className="relative z-10">
         <Navbar />

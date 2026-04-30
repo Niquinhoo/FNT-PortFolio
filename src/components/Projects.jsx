@@ -61,7 +61,7 @@ const BorderTrail = ({ radius = 24, isHovered }) => {
         transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500%] aspect-square z-0 pointer-events-none"
         style={{
-          background: `conic-gradient(from 0deg, transparent 135deg, #D90429 180deg, transparent 180deg, transparent 315deg, #D90429 360deg)`
+          background: `conic-gradient(from 0deg, transparent 135deg, var(--primary) 180deg, transparent 180deg, transparent 315deg, var(--primary) 360deg)`
         }}
       />
       <div 
@@ -376,7 +376,7 @@ const Projects = () => {
           {/* Animated Background */}
           <div 
             ref={bgRef}
-            className="absolute inset-0 w-full h-full bg-[#D90429] opacity-0 pointer-events-none flex items-center justify-center overflow-hidden z-0"
+            className="absolute inset-0 w-full h-full bg-primary opacity-0 pointer-events-none flex items-center justify-center overflow-hidden z-0"
           >
             <div 
               ref={textRef}

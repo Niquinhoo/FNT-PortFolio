@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import ThemeToggle from './ThemeToggle';
 
 const TypingLogo = () => {
   const fullText = "FNicolasTriberti";
@@ -131,7 +132,8 @@ const Navbar = () => {
         ))}
       </div>
 
-      <div className="flex items-center relative z-10">
+      <div className="flex items-center gap-4 relative z-10">
+        <ThemeToggle />
         <a 
           href="#contact"
           className="bg-primary text-on-primary px-8 py-2.5 text-xs font-label uppercase tracking-[0.2em] hover:bg-on-surface hover:text-surface transition-all duration-500 rounded-full shadow-md hover:shadow-primary/20"

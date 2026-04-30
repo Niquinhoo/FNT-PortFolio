@@ -1,26 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { animate } from 'animejs';
+import { useTheme } from '../context/ThemeContext';
 
 const Hero = () => {
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) return savedTheme === 'dark';
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-    return false;
-  });
+  const { isDark, toggleTheme } = useTheme();
 
   const sunCoreRef = useRef(null);
   const moonMaskRef = useRef(null);
   const raysRef = useRef(null);
   const svgRef = useRef(null);
-
-  useEffect(() => {
-    // Sync document class on mount
-    document.documentElement.classList.toggle('dark', isDark);
-  }, []);
 
   useEffect(() => {
     // Anime.js v4 SVG Animation Logic
@@ -79,13 +68,6 @@ const Hero = () => {
     }
   }, [isDark]);
 
-  const toggleTheme = () => {
-    const nextDark = !isDark;
-    setIsDark(nextDark);
-    document.documentElement.classList.toggle('dark', nextDark);
-    localStorage.setItem('theme', nextDark ? 'dark' : 'light');
-  };
-
   return (
     <section
       id="hero"
@@ -133,9 +115,9 @@ const Hero = () => {
 
           {/* Label text */}
           <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap">
-            <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.3em] uppercase text-gray-400 group-hover:text-[#D90429] transition-colors">
+            {/* <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.3em] uppercase text-gray-400 group-hover:text-[#D90429] transition-colors">
               {isDark ? 'embrace the night' : 'let there be light'}
-            </span>
+            </span> */}
           </div>
         </button>
       </div>
