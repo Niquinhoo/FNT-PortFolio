@@ -1,7 +1,9 @@
-import React from 'react';
+import { useEffect } from 'react';
+import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
+import BlueprintBackground from './components/BlueprintBackground';
 
 import TechStack from './components/TechStack';
 import About from './components/About';
@@ -9,16 +11,40 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
-  return (
-    <div className="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
-      <Navbar />
-      <Hero />
-      <Projects />
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smoothHandlers: true,
+      smoothWheel: true,
+    });
 
-      <TechStack />
-      <About />
-      <Contact />
-      <Footer />
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  return (
+    <div className="bg-[#F5F2EB] text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen relative">
+      <BlueprintBackground isGlobal={true} />
+      <div className="relative z-10">
+        <Navbar />
+        <Hero />
+        <Projects />
+        <TechStack />
+        <About />
+        <Contact />
+        <Footer />
+      </div>
     </div>
   );
 }

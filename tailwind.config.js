@@ -36,14 +36,14 @@ export default {
         "on-primary-fixed": "#9F2F2D",
         "on-primary-fixed-variant": "#7A1C1A",
         
-        // Orange Accent (Naranja)
-        "secondary": "#F77F00",
+        // Dark Red Accent (Replacing Orange)
+        "secondary": "#8D021F",
         "on-secondary": "#FFFFFF",
-        "secondary-container": "#FFF0E6", // Pale Orange
-        "on-secondary-container": "#B35900", // Text on Pale Orange
-        "secondary-fixed": "#FFF0E6",
-        "secondary-fixed-dim": "#FFE0CC",
-        "on-secondary-fixed": "#B35900",
+        "secondary-container": "#FDEBEC", // Pale Red
+        "on-secondary-container": "#8D021F", // Text on Pale Red
+        "secondary-fixed": "#FDEBEC",
+        "secondary-fixed-dim": "#FAD4D6",
+        "on-secondary-fixed": "#8D021F",
         
         // Muted/Tertiary
         "tertiary": "#787774",
@@ -76,9 +76,12 @@ export default {
       },
       "fontFamily": {
         "headline": ["Playfair Display", "serif"],
-        "body": ["'Helvetica Neue'", "Helvetica", "Arial", "sans-serif"],
-        "label": ["'Helvetica Neue'", "Helvetica", "Arial", "sans-serif"],
-        "mono": ["'JetBrains Mono'", "monospace"]
+        "serif": ["Playfair Display", "serif"],
+        "sans": ["Inter", "sans-serif"],
+        "body": ["Inter", "sans-serif"],
+        "label": ["Inter", "sans-serif"],
+        "mono": ["Fira Code", "monospace"],
+        "inter": ["Inter", "sans-serif"]
       }
     },
   },

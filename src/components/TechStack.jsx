@@ -2,7 +2,7 @@ import React from 'react';
 
 const TechStack = () => {
   return (
-    <section className="py-32 bg-surface-container border-b border-outline" id="process">
+    <section className="py-32 bg-transparent border-b border-outline relative z-10" id="process">
       <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-16">
         <div>
           <span className="font-label text-xs uppercase tracking-widest text-secondary">03 — Foundation</span>

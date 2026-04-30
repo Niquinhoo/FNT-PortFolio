@@ -31,6 +31,22 @@ body {
   /* subtle noise/texture pattern could go here, removing heavy image for now */
 }
 
+/* Custom Global Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFFFFF;
+}
+::-webkit-scrollbar-thumb {
+  background: #D90429;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8D021F;
+}
+
+
 /* Scrollbar */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -41,7 +57,28 @@ body {
   scrollbar-width: none;
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling with Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 html {
   scroll-behavior: smooth;
 }

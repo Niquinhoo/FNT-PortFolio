@@ -2,7 +2,7 @@ import React from 'react';
 
 const About = () => {
   return (
-    <section className="py-32 bg-surface border-b border-outline" id="about">
+    <section className="py-32 bg-transparent border-b border-outline relative z-10" id="about">
       <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
         {/* Left Side: Text Block */}
         <div className="lg:col-span-8 space-y-8">

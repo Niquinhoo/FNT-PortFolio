@@ -73,18 +73,18 @@ const BorderTrail = ({ radius = 24, isHovered }) => {
 };
 
 const transforms = [
-  { x: "-38vw", y: "12vh", rotate: -12, zIndex: 10 },
-  { x: "-19vw", y: "4vh", rotate: -6, zIndex: 20 },
-  { x: "0vw", y: "0vh", rotate: 0, zIndex: 30 },
-  { x: "19vw", y: "4vh", rotate: 6, zIndex: 20 },
-  { x: "38vw", y: "12vh", rotate: 12, zIndex: 10 },
+  { x: "-38vw", y: "12vh", rotate: -12, zIndex: 10, startX: "-4vw", startY: "2vh", startRotate: -3 },
+  { x: "-19vw", y: "4vh", rotate: -6, zIndex: 20, startX: "-2vw", startY: "1vh", startRotate: -1.5 },
+  { x: "0vw", y: "0vh", rotate: 0, zIndex: 30, startX: "0vw", startY: "0vh", startRotate: 0 },
+  { x: "19vw", y: "4vh", rotate: 6, zIndex: 20, startX: "2vw", startY: "1vh", startRotate: 1.5 },
+  { x: "38vw", y: "12vh", rotate: 12, zIndex: 10, startX: "4vw", startY: "2vh", startRotate: 3 },
 ];
 
 const FeaturedCard = ({ project, index, scrollYProgress, onClick, selectedProjectId, activeTransitionId }) => {
   const config = transforms[index] || transforms[2];
-  const x = useTransform(scrollYProgress, [0, 1], ["0vw", config.x]);
-  const y = useTransform(scrollYProgress, [0, 1], ["0vh", config.y]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, config.rotate]);
+  const x = useTransform(scrollYProgress, [0, 1], [config.startX, config.x]);
+  const y = useTransform(scrollYProgress, [0, 1], [config.startY, config.y]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [config.startRotate, config.rotate]);
   const [hasHovered, setHasHovered] = useState(false);
 
   const isSelected = selectedProjectId === project.id;
@@ -245,6 +245,22 @@ const Projects = () => {
   const [isModalReady, setIsModalReady] = useState(false);
   const [activeTransitionId, setActiveTransitionId] = useState(null);
   const [currentGalleryIndex, setCurrentGalleryIndex] = useState(0);
+  const modalScrollRef = useRef(null);
+  
+  const scrollToTop = () => {
+    if (modalScrollRef.current) {
+      modalScrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const scrollToBottom = () => {
+    if (modalScrollRef.current) {
+      modalScrollRef.current.scrollTo({ 
+        top: modalScrollRef.current.scrollHeight, 
+        behavior: 'smooth' 
+      });
+    }
+  };
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -351,7 +367,7 @@ const Projects = () => {
   }, [selectedProject]);
 
   return (
-    <section className="bg-surface relative">
+    <section className="bg-transparent relative z-10">
       {/* The Scroll Animation Section */}
       <div ref={containerRef} className="relative h-[400vh] w-full border-b border-outline">
         <div id="work" className="absolute top-[300vh]" />
@@ -425,20 +441,41 @@ const Projects = () => {
 
       {/* Project Details Modal - Rendered Conditionally without AnimatePresence */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-12 pointer-events-none">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-12">
           {/* Backdrop */}
           <div
             onClick={handleCloseModal}
-            className={`absolute inset-0 z-0 pointer-events-auto transition-all duration-700 ease-in-out ${isModalReady ? 'backdrop-blur-md bg-background/80' : 'backdrop-blur-none bg-background/0'}`}
+            className={`fixed inset-0 z-0 transition-all duration-700 ease-in-out ${isModalReady ? 'backdrop-blur-md bg-background/80' : 'backdrop-blur-none bg-background/0'}`}
           />
           
           <div
             style={{ viewTransitionName: `project-card-${selectedProject.id}` }}
-            className="w-full max-w-[95vw] xl:max-w-[1400px] bg-surface-container border border-outline rounded-[2rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row h-full max-h-[85vh] lg:max-h-[85vh] relative z-10 pointer-events-auto"
+            className="w-full max-w-[95vw] xl:max-w-[1400px] bg-surface-container border border-outline rounded-[2rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row min-h-[500px] max-h-[85vh] lg:max-h-[85vh] relative z-10 pointer-events-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Left/Center Section: Text */}
-            <div className="w-full lg:w-[40%] xl:w-[35%] p-8 lg:p-16 flex flex-col overflow-y-auto">
+            <div className="w-full lg:w-[40%] xl:w-[35%] relative group/scroll overflow-hidden border-r border-outline">
+              {/* Scroll Nav Buttons - Centered and visible on hover */}
+              <button 
+                onClick={scrollToTop}
+                className="absolute top-4 left-1/2 -translate-x-1/2 z-30 w-10 h-10 rounded-full bg-surface-container/40 backdrop-blur-md border border-outline flex items-center justify-center text-secondary opacity-0 group-hover/scroll:opacity-100 hover:bg-secondary hover:text-white transition-all shadow-lg cursor-pointer"
+                title="Volver arriba"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+              </button>
+
+              <button 
+                onClick={scrollToBottom}
+                className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 w-10 h-10 rounded-full bg-surface-container/40 backdrop-blur-md border border-outline flex items-center justify-center text-secondary opacity-0 group-hover/scroll:opacity-100 hover:bg-secondary hover:text-white transition-all shadow-lg cursor-pointer"
+                title="Ir abajo"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+
+              <div 
+                ref={modalScrollRef}
+                className="w-full h-full p-8 lg:p-16 flex flex-col overflow-y-auto no-scrollbar"
+              >
               <button 
                 onClick={handleCloseModal}
                 className="self-start mb-12 flex items-center gap-3 text-secondary hover:text-on-surface transition-colors group"
@@ -446,7 +483,7 @@ const Projects = () => {
                 <span className="w-8 h-8 rounded-full border border-secondary flex items-center justify-center group-hover:border-on-surface transition-colors">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                 </span>
-                <span className="font-label text-xs uppercase tracking-widest">Back to works</span>
+                <span className="font-label text-xs uppercase tracking-widest">Regresar a proyectos</span>
               </button>
               
               <span className="text-secondary font-label tracking-widest uppercase mb-4 text-sm">{selectedProject.tags[0]}</span>
@@ -461,9 +498,16 @@ const Projects = () => {
                 style={{ viewTransitionName: `project-desc-${selectedProject.id}` }}
                 className="mb-12"
               >
-                <h4 className="font-label text-xs uppercase tracking-widest text-secondary mb-4">The Objective</h4>
+                <h4 className="font-label text-xs uppercase tracking-widest text-secondary mb-4">Descripción</h4>
                 <p className="text-on-surface-variant leading-relaxed text-lg">{selectedProject.description}</p>
               </div>
+
+              {selectedProject.problemSolved && (
+                <div className="mb-12">
+                  <h4 className="font-label text-xs uppercase tracking-widest text-secondary mb-4">El Problema Resuelto</h4>
+                  <p className="text-on-surface-variant leading-relaxed text-lg">{selectedProject.problemSolved}</p>
+                </div>
+              )}
               
               <div className="mt-auto pt-8 border-t border-outline">
                 <h4 className="font-label text-xs uppercase tracking-widest text-secondary mb-4">Tech Stack</h4>
@@ -476,8 +520,9 @@ const Projects = () => {
                 </div>
               </div>
             </div>
-            
-            {/* Right Section: Media */}
+          </div>
+          
+          {/* Right Section: Media */}
             <div className="w-full lg:w-[60%] xl:w-[65%] bg-surface relative min-h-[300px] border-t lg:border-t-0 lg:border-l border-outline p-4 lg:p-8 flex items-center justify-center">
               <div 
                 style={{ viewTransitionName: `project-image-container-${selectedProject.id}` }}
@@ -491,23 +536,6 @@ const Projects = () => {
                       alt={`${selectedProject.title} gallery ${currentGalleryIndex + 1}`}
                       className="w-full h-full object-contain"
                     />
-                    {/* Carousel Controls */}
-                    {selectedProject.gallery.length > 1 && (
-                      <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
-                        {selectedProject.gallery.map((_, idx) => (
-                          <button
-                            key={idx}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setCurrentGalleryIndex(idx);
-                            }}
-                            className={`w-2 h-2 rounded-full transition-all ${
-                              idx === currentGalleryIndex ? 'bg-secondary w-6' : 'bg-white/50 hover:bg-white'
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    )}
                     {/* Next/Prev Buttons */}
                     {selectedProject.gallery.length > 1 && (
                       <>
