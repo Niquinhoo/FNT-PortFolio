@@ -536,6 +536,24 @@ const Projects = () => {
                       alt={`${selectedProject.title} gallery ${currentGalleryIndex + 1}`}
                       className="w-full h-full object-contain"
                     />
+                    {/* Carousel Indicators */}
+                    {selectedProject.gallery.length > 1 && (
+                      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex justify-center gap-2 z-10 px-3 py-2 rounded-full bg-black/20 backdrop-blur-sm border border-white/10">
+                        {selectedProject.gallery.map((_, idx) => (
+                          <button
+                            key={idx}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setCurrentGalleryIndex(idx);
+                            }}
+                            className={`w-1.5 h-1.5 rounded-full transition-all ${
+                              idx === currentGalleryIndex ? 'bg-secondary w-4' : 'bg-white/40 hover:bg-white'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    )}
+
                     {/* Next/Prev Buttons */}
                     {selectedProject.gallery.length > 1 && (
                       <>
