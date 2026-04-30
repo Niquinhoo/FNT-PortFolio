@@ -37,7 +37,7 @@ const HeroPortfolio = () => {
 
         {/* Párrafo de descripción */}
         <p className="font-inter text-gray-500 max-w-md text-sm sm:text-base leading-relaxed mb-12">
-          Crafting high-performance digital experiences with a focus on clean architecture, scalability, and impeccable user interface design.
+          Desarolando herramientas para cuidar tu tiempo
         </p>
 
         {/* Botón / Link de acción */}

@@ -98,7 +98,13 @@ export const sideProjects = [
     description: "Adiós a los cálculos complejos. Aplicación en React Native diseñada para simplificar el gasto grupal, aplicando lógica de compensación de saldos para determinar quién debe pagar a quién con un solo clic.",
     tags: ["Mobile UX", "Algoritmos de reparto", "Finanzas sociales"],
     desktopImg: "/projects/splitit.png",
-    mobileImg: "/projects/splitit.png"
+    mobileImg: "/projects/splitit.png",
+    previewVideo: "/projects/splitit-preview.mp4",
+    gallery: [
+      "/projects/splitit-0.png",
+      "/projects/splitit-1.png",
+      "/projects/splitit-2.png"
+    ]
   },
   {
     id: 7,
@@ -106,7 +112,11 @@ export const sideProjects = [
     description: "El aliado perfecto para la mesa. Una herramienta de gestión para partidas de poker que automatiza el reparto de fichas, controla los niveles de ciegas y organiza la dinámica del juego sin interrupciones.",
     tags: ["Real-time UX", "Lógica de juego", "Utilidad"],
     desktopImg: "/projects/hpoker.png",
-    mobileImg: "/projects/hpoker.png"
+    mobileImg: "/projects/hpoker.png",
+    previewVideo: "/projects/poker-preview.mp4",
+    gallery: [
+      "/projects/hpoker.png"
+    ]
   },
   {
     id: 8,
@@ -114,6 +124,14 @@ export const sideProjects = [
     description: "Gamificación instantánea. Una pequeña web app diseñada para dinamizar juegos grupales mediante la asignación aleatoria de roles, priorizando la velocidad de carga y la facilidad de uso.",
     tags: ["Micro-interacciones", "Diversión", "UX Minimalista"],
     desktopImg: "/projects/vmimpostor.png",
-    mobileImg: "/projects/vmimpostor.png"
+    mobileImg: "/projects/vmimpostor.png",
+    previewVideo: "/projects/impostor-preview.mp4",
+    gallery: [
+      "/projects/impostor-0.png",
+      "/projects/impostor-1.png",
+      "/projects/impostor-2.png",
+      "/projects/impostor-3.png",
+      "/projects/impostor-4.png"
+    ]
   }
 ];
