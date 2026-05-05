@@ -9,6 +9,7 @@ import TechStack from './components/TechStack';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import CustomCursor from './components/CustomCursor';
 
 function App() {
   useEffect(() => {
@@ -37,6 +38,7 @@ function App() {
 
   return (
     <div className="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen relative transition-colors duration-500">
+      <CustomCursor />
       <BlueprintBackground isGlobal={true} />
       <div className="relative z-10">
         <Navbar />

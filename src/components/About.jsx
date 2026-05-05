@@ -19,9 +19,6 @@ const About = () => {
             <p>
               Tener proyectos en producción utilizados por clientes reales me ha dado una perspectiva práctica del software: entiendo que un buen diseño debe ser intuitivo para el usuario y robusto en su backend para ser escalable.
             </p>
-            <p className="font-label text-sm uppercase tracking-[0.2em] text-primary font-bold pt-4">
-              Disponible para proyectos freelance y remote positions.
-            </p>
           </div>
         </div>
 
