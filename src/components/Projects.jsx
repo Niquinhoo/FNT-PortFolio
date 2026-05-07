@@ -388,7 +388,7 @@ const Projects = () => {
           </div>
 
           <div className="absolute top-24 w-full px-8 max-w-7xl mx-auto left-0 right-0 z-40 pointer-events-none">
-            <span className="font-label text-xs uppercase tracking-widest text-secondary">01 — Producción</span>
+            <span className="font-label text-xs uppercase tracking-widest text-secondary">02 — Producción</span>
             <h3 className="font-headline text-5xl font-bold mt-2 text-on-surface">Soluciones que llegaron a producción</h3>
           </div>
 
@@ -421,7 +421,7 @@ const Projects = () => {
       <div className="py-32 border-b border-outline">
         <div className="max-w-7xl mx-auto px-8">
           <div className="mb-16">
-            <span className="font-label text-xs uppercase tracking-widest text-secondary">02 — Creative Lab & Side Proyects</span>
+            <span className="font-label text-xs uppercase tracking-widest text-secondary">03 — Creative Lab & Side Proyects</span>
             <h3 className="font-headline text-4xl font-bold mt-2 text-on-surface">Juegos y Herramientas</h3>
           </div>
 

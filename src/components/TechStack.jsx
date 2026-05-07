@@ -81,7 +81,7 @@ const TechStack = () => {
         >
           <span className="font-label text-xs uppercase tracking-widest text-secondary inline-flex items-center gap-2">
             <span className="w-8 h-[1px] bg-secondary/30"></span>
-            03 — Bases
+            04 — Bases
           </span>
           <h3 className="font-headline text-5xl font-bold mt-6 text-on-surface leading-tight">
             Filosofía <br />

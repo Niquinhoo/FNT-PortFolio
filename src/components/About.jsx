@@ -15,7 +15,7 @@ const About = () => {
           
           <div className="space-y-6 text-lg text-on-surface-variant leading-relaxed max-w-3xl">
             <p>
-              Desarrollador Fullstack orientado a UI/UX en el último año de Programador Universitario de Sistemas. Me enfoco en resolver problemas reales creando ecosistemas digitales completos y en producción (Citax, Courtix, Calma). Mi objetivo es siempre lograr el equilibrio perfecto entre un diseño intuitivo y un backend robusto y escalable.
+              Soy desarrollador Fullstack orientado a UI/UX en el último año de Programador Universitario de Sistemas. Me enfoco en resolver problemas reales creando ecosistemas digitales completos y en producción (Citax, Courtix, Calma). Mi objetivo es siempre lograr el equilibrio perfecto entre un diseño intuitivo y un backend robusto y escalable.
             </p>
           </div>
         </div>
