@@ -1,117 +1,114 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+
+const inputClass = "w-full bg-transparent border-b border-outline px-0 py-3 outline-none focus:border-primary hover:border-on-surface-variant transition-all duration-300 placeholder:text-on-surface-variant/40 text-on-surface font-label text-sm tracking-wide";
 
 const Contact = () => {
-  const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-  
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-200px" });
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
-  useEffect(() => {
-    if (isInView) {
-      const timer = setTimeout(() => setIsEnvelopeOpen(true), 400);
-      return () => clearTimeout(timer);
-    }
-  }, [isInView]);
+  const stagger = (i) => ({
+    initial: { opacity: 0, y: 24 },
+    animate: isInView ? { opacity: 1, y: 0 } : {},
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] },
+  });
 
   return (
-    <section 
-      ref={containerRef} 
-      className="py-32 max-w-4xl mx-auto px-8 text-center bg-surface relative min-h-[700px] flex flex-col justify-start" 
+    <section
+      ref={containerRef}
+      className="py-32 border-b border-outline relative z-10 bg-transparent"
       id="contact"
     >
-      <span className="font-label text-xs uppercase tracking-widest text-primary mb-4 block">Hablemos</span>
-      <h3 className="font-headline text-5xl md:text-6xl font-bold mb-12 text-on-surface">¿Construimos algo nuevo?</h3>
+      <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
 
-      <div className="relative w-full flex items-center justify-center mt-12 min-h-[400px]">
-        <AnimatePresence mode="wait">
-          {!showForm ? (
-            /* --- ANIMACIÓN DEL SOBRE --- */
+        {/* Left: Header block — mirrors About/Projects layout */}
+        <div className="lg:col-span-5 flex flex-col justify-between gap-16">
+          <div>
+            <motion.span {...stagger(0)} className="font-label text-xs uppercase tracking-widest text-primary block mb-6">
+              05 — Contacto
+            </motion.span>
+            <motion.h3 {...stagger(1)} className="font-headline text-5xl md:text-6xl font-bold leading-tight text-on-surface">
+              ¿Construimos<br />
+              <span className="italic font-normal text-primary">algo nuevo?</span>
+            </motion.h3>
             <motion.div
-              key="envelope-sequence"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 1.1, filter: "blur(8px)" }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="absolute flex items-center justify-center w-80 h-56"
-            >
-              {/* Parte trasera del sobre */}
-              <div className="absolute inset-0 bg-red-800 rounded-md shadow-2xl z-0" />
-              
-              {/* Carta interior saliendo */}
-              <motion.div 
-                initial={{ y: 10, opacity: 0 }}
-                animate={isEnvelopeOpen ? { y: -90, opacity: 1 } : { y: 10, opacity: 0 }}
-                transition={{ delay: 0.2, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                onAnimationComplete={() => {
-                  if (isEnvelopeOpen) {
-                    setTimeout(() => setShowForm(true), 200); 
-                  }
-                }}
-                className="absolute w-72 h-48 bg-white rounded border border-gray-200 flex flex-col items-start justify-start p-6 shadow-lg z-10"
-              >
-                 <div className="w-1/3 h-2 bg-gray-200 rounded mb-6"></div>
-                 <div className="w-full h-2 bg-gray-100 rounded mb-3"></div>
-                 <div className="w-full h-2 bg-gray-100 rounded mb-3"></div>
-                 <div className="w-4/5 h-2 bg-gray-100 rounded"></div>
-              </motion.div>
+              initial={{ scaleX: 0, originX: 0 }}
+              animate={isInView ? { scaleX: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="w-20 h-px bg-outline mt-8"
+            />
+            <motion.p {...stagger(3)} className="mt-8 text-on-surface-variant text-base leading-relaxed max-w-sm">
+              Contame tu idea. Disponible para proyectos freelance, full-time/part-time, pasantías, o simplemente tomar un café y charlar.
+            </motion.p>
+          </div>
 
-              {/* Frente del sobre */}
-              <div className="absolute inset-0 z-20 pointer-events-none rounded-md overflow-hidden">
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full text-red-600 drop-shadow-md">
-                  <polygon points="0,0 50,55 100,0 100,100 0,100" fill="currentColor" />
-                  <polygon points="0,0 30,35 0,100" fill="#dc2626" /> 
-                  <polygon points="100,0 70,35 100,100" fill="#dc2626" /> 
-                </svg>
-              </div>
-
-              {/* Solapa Superior Animada */}
-              <motion.div
-                initial={{ rotateX: 0 }}
-                animate={isEnvelopeOpen ? { rotateX: 180 } : { rotateX: 0 }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                style={{ transformOrigin: "top", backfaceVisibility: "hidden" }}
-                className="absolute top-0 left-0 w-full h-[65%] z-30"
+          {/* Contact info links */}
+          <motion.div {...stagger(4)} className="flex flex-col gap-4">
+            {[
+              { label: 'Email', value: 'nicotrib699@gmail.com', href: 'mailto:nicotrib699@gmail.com' },
+              { label: 'LinkedIn', value: 'linkedin.com/in/nicolastriberti', href: 'https://www.linkedin.com/in/nicolas-triberti-224651247/' },
+              { label: 'GitHub', value: 'github.com/Niquinhoo', href: 'https://github.com/Niquinhoo' },
+            ].map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-baseline gap-6 group"
               >
-                <svg viewBox="0 0 100 65" preserveAspectRatio="none" className="w-full h-full text-red-500 drop-shadow-lg">
-                  <polygon points="0,0 100,0 50,65" fill="currentColor" stroke="rgba(0,0,0,0.1)" strokeWidth="0.5" />
-                </svg>
-              </motion.div>
-            </motion.div>
-          ) : (
-            /* --- FORMULARIO REAL --- */
-            <motion.form 
-              key="contact-form"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="space-y-12 text-left w-full absolute top-0"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div className="group relative">
-                  <label className="block font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2">Nombre</label>
-                  <input className="w-full bg-transparent border border-outline px-4 py-4 outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 hover:border-primary transition-all duration-300 placeholder:text-on-surface-variant/50 text-on-surface rounded-xl" placeholder="Tu nombre" type="text"/>
-                </div>
-                <div className="group relative">
-                  <label className="block font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2">Email</label>
-                  <input className="w-full bg-transparent border border-outline px-4 py-4 outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 hover:border-primary transition-all duration-300 placeholder:text-on-surface-variant/50 text-on-surface rounded-xl" placeholder="tu@email.com" type="email"/>
-                </div>
+                <span className="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant w-20 shrink-0">{item.label}</span>
+                <span className="font-label text-sm text-on-surface group-hover:text-primary transition-colors duration-200 relative">
+                  {item.value}
+                  <span className="absolute -bottom-px left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-300" />
+                </span>
+              </a>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Right: Form — separated by border like About stats */}
+        <motion.div
+          {...stagger(2)}
+          className="lg:col-span-7 lg:border-l lg:border-outline lg:pl-16"
+        >
+          <form className="flex flex-col gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <div className="flex flex-col gap-2">
+                <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Nombre</label>
+                <input className={inputClass} placeholder="Tu nombre" type="text" />
               </div>
-              
-              <div className="group relative">
-                <label className="block font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2">Mensaje</label>
-                <textarea className="w-full bg-transparent border border-outline px-4 py-4 outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 hover:border-primary transition-all duration-300 placeholder:text-on-surface-variant/50 text-on-surface rounded-xl" placeholder="Cuéntame sobre tu proyecto..." rows="4"></textarea>
+              <div className="flex flex-col gap-2">
+                <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Email</label>
+                <input className={inputClass} placeholder="tu@email.com" type="email" />
               </div>
-              
-              <div className="pt-8 text-center">
-                <button className="bg-primary text-on-primary px-12 py-4 font-label uppercase tracking-widest text-sm hover:bg-primary/90 transition-all duration-300 rounded-sm" type="submit">
-                  Enviar Mensaje
-                </button>
-              </div>
-            </motion.form>
-          )}
-        </AnimatePresence>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Asunto</label>
+              <input className={inputClass} placeholder="Sobre qué proyecto querés hablar" type="text" />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Mensaje</label>
+              <textarea
+                className={`${inputClass} resize-none border-b`}
+                placeholder="Contame los detalles..."
+                rows="5"
+              />
+            </div>
+
+            <div className="pt-4">
+              <button
+                type="submit"
+                className="group inline-flex items-center gap-4 font-label text-[10px] uppercase tracking-[0.22em] text-on-surface hover:text-primary transition-colors duration-200"
+              >
+                Enviar Mensaje
+                <span className="inline-block w-14 h-px bg-on-surface group-hover:bg-primary group-hover:w-20 transition-all duration-300" />
+              </button>
+            </div>
+          </form>
+        </motion.div>
+
       </div>
     </section>
   );

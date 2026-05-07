@@ -43,9 +43,9 @@ function App() {
       <div className="relative z-10">
         <Navbar />
         <Hero />
+        <About />
         <Projects />
         <TechStack />
-        <About />
         <Contact />
         <Footer />
       </div>

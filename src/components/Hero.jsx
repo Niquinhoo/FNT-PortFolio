@@ -171,7 +171,7 @@ const Hero = () => {
           className="flex flex-wrap items-center gap-8"
         >
           {/* Download CV */}
-          <a
+          {/* <a
             href="/cv.pdf"
             download
             className="group inline-flex items-center gap-3 font-inter text-[10px] font-bold tracking-[0.22em] uppercase text-gray-700 hover:text-[#D90429] transition-colors duration-200"
@@ -186,7 +186,7 @@ const Hero = () => {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
-          </a>
+          </a> */}
 
           {/* Explore work */}
           <a
@@ -198,10 +198,10 @@ const Hero = () => {
           </a>
 
           {/* Social */}
-          <div className="flex gap-6 font-inter text-[10px] font-bold tracking-[0.22em] uppercase text-gray-700">
+          {/* <div className="flex gap-6 font-inter text-[10px] font-bold tracking-[0.22em] uppercase text-gray-700">
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#D90429] transition-colors duration-200">LinkedIn</a>
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#D90429] transition-colors duration-200">GitHub</a>
-          </div>
+          </div> */}
         </motion.div>
 
       </div>
