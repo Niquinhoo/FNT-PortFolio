@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { GitHubCalendar } from 'react-github-calendar';
 
 const inputClass = "w-full bg-transparent border-b border-outline px-0 py-3 outline-none focus:border-primary hover:border-on-surface-variant transition-all duration-300 placeholder:text-on-surface-variant/40 text-on-surface font-label text-sm tracking-wide";
 
@@ -19,7 +20,24 @@ const Contact = () => {
       className="py-32 border-b border-outline relative z-10 bg-transparent"
       id="contact"
     >
-      <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+      <div className="max-w-7xl mx-auto px-8 flex flex-col gap-20">
+
+        {/* GitHub Calendar — full width */}
+        <motion.div {...stagger(0)} className="flex flex-col gap-4">
+          <span className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Actividad en GitHub</span>
+          <div className="overflow-x-auto">
+            <GitHubCalendar
+              username="Niquinhoo"
+              colorScheme="dark"
+              blockSize={13}
+              blockMargin={4}
+              fontSize={12}
+            />
+          </div>
+        </motion.div>
+
+        {/* Bottom grid: header + form */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
 
         {/* Left: Header block — mirrors About/Projects layout */}
         <div className="lg:col-span-5 flex flex-col justify-between gap-16">
@@ -109,7 +127,9 @@ const Contact = () => {
           </form>
         </motion.div>
 
-      </div>
+        </div>{/* end bottom grid */}
+
+      </div>{/* end outer flex */}
     </section>
   );
 };

@@ -118,9 +118,9 @@ const Navbar = () => {
       
       <div className="hidden lg:flex gap-10 items-center">
         {[
+          { name: 'Sobre Mí', href: '#about' },
           { name: 'Proyectos', href: '#work' },
-          { name: 'Habilidades', href: '#process' },
-          { name: 'Sobre Mí', href: '#about' }
+          { name: 'Habilidades', href: '#process' }
         ].map((item, idx) => (
           <a 
             key={item.name}
