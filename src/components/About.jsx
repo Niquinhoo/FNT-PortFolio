@@ -35,7 +35,19 @@ const About = () => {
         {/* GitHub Calendar — full width, centered */}
         <div className="lg:col-span-12 flex flex-col items-center gap-4 pt-8 border-t border-outline">
           <span className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant self-start">Actividad en GitHub</span>
-          <div className="w-full flex justify-center overflow-x-auto">
+          <div className="w-full">
+            <style>{`
+              .react-activity-calendar {
+                width: 100% !important;
+              }
+              .react-activity-calendar__scroll-container {
+                overflow-x: visible !important;
+              }
+              .react-activity-calendar__calendar {
+                width: 100% !important;
+                height: auto !important;
+              }
+            `}</style>
             <GitHubCalendar
               username="Niquinhoo"
               colorScheme="dark"
