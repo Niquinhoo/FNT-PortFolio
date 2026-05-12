@@ -59,9 +59,9 @@ const TypingLogo = () => {
   }, [displayText, phase]);
 
   return (
-    <div className="flex items-center gap-0.5 font-headline font-bold text-2xl tracking-tighter relative pr-8 md:pr-16 lg:pr-24">
-      {/* Hidden spacer to reserve width */}
-      <span className="opacity-0 pointer-events-none select-none h-0 md:h-auto overflow-hidden">
+    <div className="flex items-center gap-0.5 font-headline font-bold text-2xl tracking-tighter relative pr-2 md:pr-16 lg:pr-24">
+      {/* Hidden spacer to reserve width — desktop only */}
+      <span className="opacity-0 pointer-events-none select-none overflow-hidden hidden md:block">
         {fullText}
       </span>
       
@@ -99,7 +99,7 @@ const Navbar = () => {
   return (
     <motion.nav 
       style={{ boxShadow }}
-      className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-5xl rounded-full liquid-glass flex justify-between items-center px-6 md:px-10 py-4 z-[9999] transition-colors duration-300"
+      className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-5xl rounded-full liquid-glass flex justify-between items-center px-4 md:px-10 py-3 md:py-4 z-[9999] transition-colors duration-300"
     >
       {/* Animated Red Border */}
       <motion.div 
@@ -134,10 +134,10 @@ const Navbar = () => {
 
       <div className="flex items-center gap-4 relative z-10">
         <ThemeToggle />
-        <a 
-          href="#contact"
-          className="bg-primary text-on-primary px-8 py-2.5 text-xs font-label uppercase tracking-[0.2em] hover:bg-on-surface hover:text-surface transition-all duration-500 rounded-full shadow-md hover:shadow-primary/20"
-        >
+          <a 
+            href="#contact"
+            className="bg-primary text-on-primary px-5 py-2 md:px-8 md:py-2.5 text-[10px] md:text-xs font-label uppercase tracking-[0.2em] hover:bg-on-surface hover:text-surface transition-all duration-500 rounded-full shadow-md hover:shadow-primary/20"
+          >
           Contacto
         </a>
       </div>

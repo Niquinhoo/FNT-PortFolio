@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
 import { motion, useSpring, useMotionValue } from 'framer-motion';
 
+const isTouchDevice = typeof window !== 'undefined' &&
+  (window.matchMedia?.('(hover: none) and (pointer: coarse)').matches ||
+   'ontouchstart' in window);
+
 const CustomCursor = () => {
+  if (isTouchDevice) return null;
+
   // Cursor position state for the main cursor (no delay)
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isVisible, setIsVisible] = useState(false);

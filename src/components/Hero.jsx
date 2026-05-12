@@ -71,13 +71,13 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-start justify-end px-6 sm:px-12 pb-32 sm:pb-40 bg-[#FDFBF7]/10 dark:bg-[#0a0a0a]/10 backdrop-blur-sm overflow-hidden font-sans transition-colors duration-700"
+      className="relative min-h-screen flex flex-col items-start justify-end px-6 sm:px-12 pb-20 sm:pb-32 lg:pb-40 bg-[#FDFBF7]/10 dark:bg-[#0a0a0a]/10 backdrop-blur-sm overflow-hidden font-sans transition-colors duration-700"
     >
       {/* ── THEME TOGGLE: SVG + Anime.js Version ── */}
       <div className="absolute top-[10%] right-[5%] sm:right-[10%] z-20">
         <button
           onClick={toggleTheme}
-          className="relative w-40 h-40 sm:w-56 sm:h-56 flex flex-col items-center justify-center group focus:outline-none"
+          className="relative w-20 h-20 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 flex flex-col items-center justify-center group focus:outline-none"
           aria-label="Toggle theme"
         >
           {/* Ambient Glow */}
@@ -86,8 +86,8 @@ const Hero = () => {
           <svg 
             ref={svgRef}
             className="theme-toggle-svg text-[#E67E22] dark:text-[#FDFBF7] drop-shadow-2xl transition-colors duration-500" 
-            width="120" 
-            height="120" 
+            width="100%" 
+            height="100%" 
             viewBox="0 0 24 24" 
             fill="none" 
             stroke="currentColor" 
@@ -125,21 +125,14 @@ const Hero = () => {
       {/* ── MAIN CONTENT ── */}
       <div className="relative z-10 w-full max-w-7xl">
 
-        {/* Role badge */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="font-mono text-[#E67E22] text-[10px] sm:text-xs font-medium tracking-[0.22em] uppercase mb-6"
-        >
-        </motion.p>
+
 
         {/* Name */}
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-serif text-[5.5rem] sm:text-[8rem] md:text-[9.5rem] lg:text-[11rem] leading-[0.85] tracking-tight text-[#111] dark:text-[#FDFBF7] mb-8"
+          className="font-serif text-[2.2rem] min-[420px]:text-[3rem] min-[520px]:text-[4.5rem] sm:text-[8rem] md:text-[9.5rem] lg:text-[11rem] leading-[0.9] sm:leading-[0.85] tracking-tight text-[#111] dark:text-[#FDFBF7] mb-4 sm:mb-8"
         >
           Nicolás
           <span className="italic font-normal text-[#D90429]">Triberti</span>

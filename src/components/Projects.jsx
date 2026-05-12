@@ -4,6 +4,7 @@ import { featuredProjects, sideProjects } from '../data/projectsData';
 import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { createTimeline } from 'animejs';
 import { Calendar, ShoppingCart, CloudRain, Rocket, Banknote, Dices, UserSearch } from 'lucide-react';
+import MobileTimeline from './MobileTimeline';
 
 const FootballIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -369,7 +370,7 @@ const Projects = () => {
   return (
     <section className="bg-transparent relative z-10">
       {/* The Scroll Animation Section */}
-      <div ref={containerRef} className="relative h-[400vh] w-full border-b border-outline">
+      <div ref={containerRef} className="relative h-[400vh] w-full border-b border-outline hidden md:block">
         <div id="work" className="absolute top-[300vh]" />
         <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
           
@@ -415,9 +416,12 @@ const Projects = () => {
           </motion.div>
 
         </div>
-      </div>
+            </div>
 
-      {/* Side Projects Section */}
+      <MobileTimeline onProjectClick={handleSelectProject} />
+
+      {/* Side Projects Section */
+}
       <div className="py-32 border-b border-outline">
         <div className="max-w-7xl mx-auto px-8">
           <div className="mb-16">
@@ -450,7 +454,7 @@ const Projects = () => {
           
           <div
             style={{ viewTransitionName: `project-card-${selectedProject.id}` }}
-            className="w-full max-w-[95vw] xl:max-w-[1400px] bg-surface-container border border-outline rounded-[2rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row min-h-[500px] max-h-[85vh] lg:max-h-[85vh] relative z-10 pointer-events-auto"
+            className="w-full max-w-[95vw] xl:max-w-[1400px] bg-surface-container border border-outline rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row min-h-[400px] md:min-h-[500px] max-h-[90vh] md:max-h-[85vh] relative z-10 pointer-events-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Left/Center Section: Text */}
@@ -458,7 +462,7 @@ const Projects = () => {
               {/* Scroll Nav Buttons - Centered and visible on hover */}
               <button 
                 onClick={scrollToTop}
-                className="absolute top-4 left-1/2 -translate-x-1/2 z-30 w-10 h-10 rounded-full bg-surface-container/40 backdrop-blur-md border border-outline flex items-center justify-center text-secondary opacity-0 group-hover/scroll:opacity-100 hover:bg-secondary hover:text-white transition-all shadow-lg cursor-pointer"
+                className="hidden md:flex absolute top-4 left-1/2 -translate-x-1/2 z-30 w-10 h-10 rounded-full bg-surface-container/40 backdrop-blur-md border border-outline items-center justify-center text-secondary opacity-0 group-hover/scroll:opacity-100 hover:bg-secondary hover:text-white transition-all shadow-lg cursor-pointer"
                 title="Volver arriba"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/></svg>
@@ -466,7 +470,7 @@ const Projects = () => {
 
               <button 
                 onClick={scrollToBottom}
-                className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 w-10 h-10 rounded-full bg-surface-container/40 backdrop-blur-md border border-outline flex items-center justify-center text-secondary opacity-0 group-hover/scroll:opacity-100 hover:bg-secondary hover:text-white transition-all shadow-lg cursor-pointer"
+                className="hidden md:flex absolute bottom-4 left-1/2 -translate-x-1/2 z-30 w-10 h-10 rounded-full bg-surface-container/40 backdrop-blur-md border border-outline items-center justify-center text-secondary opacity-0 group-hover/scroll:opacity-100 hover:bg-secondary hover:text-white transition-all shadow-lg cursor-pointer"
                 title="Ir abajo"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
@@ -474,46 +478,46 @@ const Projects = () => {
 
               <div 
                 ref={modalScrollRef}
-                className="w-full h-full p-8 lg:p-16 flex flex-col overflow-y-auto no-scrollbar"
+                className="w-full h-full p-5 md:p-8 lg:p-16 flex flex-col overflow-y-auto no-scrollbar"
               >
               <button 
                 onClick={handleCloseModal}
-                className="self-start mb-12 flex items-center gap-3 text-secondary hover:text-on-surface transition-colors group"
+                className="self-start mb-6 md:mb-12 flex items-center gap-2 md:gap-3 text-secondary hover:text-on-surface transition-colors group"
               >
                 <span className="w-8 h-8 rounded-full border border-secondary flex items-center justify-center group-hover:border-on-surface transition-colors">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                 </span>
-                <span className="font-label text-xs uppercase tracking-widest">Regresar a proyectos</span>
+                <span className="hidden sm:inline font-label text-xs uppercase tracking-widest">Regresar a proyectos</span>
               </button>
               
-              <span className="text-secondary font-label tracking-widest uppercase mb-4 text-sm">{selectedProject.tags[0]}</span>
+              <span className="text-secondary font-label tracking-widest uppercase mb-3 md:mb-4 text-[10px] md:text-sm">{selectedProject.tags[0]}</span>
               <h2 
                 style={{ viewTransitionName: `project-title-${selectedProject.id}` }}
-                className="font-headline text-4xl md:text-5xl font-bold mb-8 text-on-surface leading-tight"
+                className="font-headline text-2xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-8 text-on-surface leading-tight"
               >
                 {selectedProject.title}
               </h2>
               
               <div 
                 style={{ viewTransitionName: `project-desc-${selectedProject.id}` }}
-                className="mb-12"
+                className="mb-6 md:mb-12"
               >
-                <h4 className="font-label text-xs uppercase tracking-widest text-secondary mb-4">Descripción</h4>
-                <p className="text-on-surface-variant leading-relaxed text-lg">{selectedProject.description}</p>
+                <h4 className="font-label text-xs uppercase tracking-widest text-secondary mb-3 md:mb-4">Descripción</h4>
+                <p className="text-on-surface-variant leading-relaxed text-sm md:text-lg">{selectedProject.description}</p>
               </div>
 
               {selectedProject.problemSolved && (
-                <div className="mb-12">
-                  <h4 className="font-label text-xs uppercase tracking-widest text-secondary mb-4">El Problema Resuelto</h4>
-                  <p className="text-on-surface-variant leading-relaxed text-lg">{selectedProject.problemSolved}</p>
+                <div className="mb-6 md:mb-12">
+                  <h4 className="font-label text-xs uppercase tracking-widest text-secondary mb-3 md:mb-4">El Problema Resuelto</h4>
+                  <p className="text-on-surface-variant leading-relaxed text-sm md:text-lg">{selectedProject.problemSolved}</p>
                 </div>
               )}
               
-              <div className="mt-auto pt-8 border-t border-outline">
-                <h4 className="font-label text-xs uppercase tracking-widest text-secondary mb-4">Tech Stack</h4>
-                <div className="flex flex-wrap gap-3">
+              <div className="mt-auto pt-5 md:pt-8 border-t border-outline">
+                <h4 className="font-label text-xs uppercase tracking-widest text-secondary mb-3 md:mb-4">Tech Stack</h4>
+                <div className="flex flex-wrap gap-2 md:gap-3">
                   {selectedProject.tags.map((tag, idx) => (
-                    <span key={idx} className="bg-surface border border-outline text-secondary px-4 py-2 font-label text-xs uppercase tracking-wider rounded-md">
+                    <span key={idx} className="bg-surface border border-outline text-secondary px-3 py-1.5 md:px-4 md:py-2 font-label text-[10px] md:text-xs uppercase tracking-wider rounded-md">
                       {tag}
                     </span>
                   ))}
@@ -523,7 +527,7 @@ const Projects = () => {
           </div>
           
           {/* Right Section: Media */}
-            <div className="w-full lg:w-[60%] xl:w-[65%] bg-surface relative min-h-[300px] border-t lg:border-t-0 lg:border-l border-outline p-4 lg:p-8 flex items-center justify-center">
+            <div className="w-full lg:w-[60%] xl:w-[65%] bg-surface relative min-h-[200px] md:min-h-[300px] border-t lg:border-t-0 lg:border-l border-outline p-2 md:p-4 lg:p-8 flex items-center justify-center">
               <div 
                 style={{ viewTransitionName: `project-image-container-${selectedProject.id}` }}
                 className="w-full h-full rounded-2xl overflow-hidden border border-outline relative group bg-surface-container flex items-center justify-center"
@@ -562,18 +566,18 @@ const Projects = () => {
                             e.stopPropagation();
                             setCurrentGalleryIndex(prev => prev === 0 ? selectedProject.gallery.length - 1 : prev - 1);
                           }}
-                          className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-md hover:bg-black/60"
+                          className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/40 text-white flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity backdrop-blur-md hover:bg-black/60"
                         >
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                         </button>
                         <button 
                           onClick={(e) => {
                             e.stopPropagation();
                             setCurrentGalleryIndex(prev => prev === selectedProject.gallery.length - 1 ? 0 : prev + 1);
                           }}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-md hover:bg-black/60"
+                          className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/40 text-white flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity backdrop-blur-md hover:bg-black/60"
                         >
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                         </button>
                       </>
                     )}
