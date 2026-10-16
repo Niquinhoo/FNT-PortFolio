@@ -8,12 +8,12 @@ test('todos los proyectos tienen un identificador único', () => {
   assert.equal(new Set(projects.map(project => project.id)).size, projects.length);
 });
 
-test('EnergyCell y Osadía tienen tarjeta propia, dos capturas y enlace al sitio', () => {
+test('EnergyCell y Osadía son proyectos principales con capturas y enlace al sitio', () => {
   for (const [title, liveUrl] of [
     ['EnergyCell', 'https://energycell-front.nicotrib699.workers.dev/'],
     ['Osadía', 'https://osadia-landing.vercel.app/'],
   ]) {
-    const project = sideProjects.find(item => item.title.startsWith(`${title} | `));
+    const project = featuredProjects.find(item => item.title.startsWith(`${title} | `));
     assert.ok(project, title);
     assert.equal(project.liveUrl, liveUrl);
     assert.equal(project.gallery.length, 2);
@@ -25,15 +25,16 @@ test('EnergyCell y Osadía tienen tarjeta propia, dos capturas y enlace al sitio
   }
 });
 
-test('los proyectos nuevos tienen contenido, portada local y repositorio público', () => {
-  const repositories = ['Final-Web1-React', 'facturador-ARCA', 'tp1-patrones-diseno'];
-  for (const repository of repositories) {
-    const project = sideProjects.find(item => item.sourceUrl === `https://github.com/Niquinhoo/${repository}`);
-    assert.ok(project, repository);
-    assert.ok(project.title && project.description && project.problemSolved);
-    assert.ok(project.tags.length > 0);
-    for (const image of [project.desktopImg, project.mobileImg]) {
+test('el catálogo conserva siete principales, tres secundarios y todos sus recursos', () => {
+  assert.equal(featuredProjects.length, 7);
+  assert.deepEqual(sideProjects.map(project => project.id), [6, 7, 8]);
+  for (const project of [...featuredProjects, ...sideProjects]) {
+    assert.ok(![9, 10, 11].includes(project.id));
+    for (const image of [project.desktopImg, project.mobileImg, ...project.gallery]) {
       assert.ok(existsSync(new URL(`../public/${image}`, import.meta.url)), image);
+    }
+    if (project.previewVideo) {
+      assert.ok(existsSync(new URL(`../public/${project.previewVideo}`, import.meta.url)));
     }
   }
 });

@@ -1,18 +1,14 @@
 # Portfolio de Facundo Nicolás Triberti
 
-Portfolio personal construido con React y Vite. Incluye cinco proyectos destacados y ocho proyectos personales y académicos, con fichas de detalle y vistas para escritorio y móvil.
+Portfolio personal construido con React y Vite. Incluye siete proyectos principales y tres proyectos de juegos y herramientas, con fichas de detalle y vistas para escritorio y móvil.
 
-## Actualización del 16 de octubre de 2026
+## Proyectos
 
-Se agregaron tres proyectos a partir de sus repositorios públicos:
+Los principales son Courtix, CalmaVM, Citax, EnergyCell, Osadía, WillItRain y LaunchUI. La animación de escritorio presenta las siete tarjetas; la línea de tiempo móvil utiliza el mismo catálogo.
 
-- [Pediloo](https://github.com/Niquinhoo/Final-Web1-React): tienda online y panel administrativo con React, TypeScript, Express y SQLite.
-- [Facturador ARCA](https://github.com/Niquinhoo/facturador-ARCA): bot de Telegram en Python para emitir Factura C y generar PDF con QR.
-- [Patrones de Diseño](https://github.com/Niquinhoo/tp1-patrones-diseno): ejemplos de Singleton, Observer y Strategy en Java, con UML y comprobaciones integradas.
+EnergyCell y Osadía incluyen dos capturas reales de sus sitios públicos y un enlace para visitarlos. EnergyCell muestra el inicio y el seguimiento de reparaciones; Osadía, el inicio y el sistema de trabajo.
 
-Cada ficha nueva incluye una portada tipográfica local y un enlace al código. Las portadas son ilustraciones del proyecto, no capturas de sus aplicaciones. Se conserva la animación de los cinco proyectos destacados y el contador se calcula a partir del catálogo completo.
-
-También se agregaron **EnergyCell** y **Osadía**, cada uno con tarjeta propia, dos capturas reales de su sitio público y un enlace para visitarlo. EnergyCell muestra el inicio y el seguimiento de reparaciones; Osadía, el inicio y el sistema de trabajo. Osadía conserva además sus imágenes anteriores dentro del caso LaunchUI.
+Los proyectos secundarios son SplitIt, HPoker y VMImpostor. El contador se calcula a partir del catálogo completo.
 
 ## Ejecutar localmente
 
@@ -33,6 +29,6 @@ npm run build
 npm run lint
 ```
 
-Las pruebas comprueban identificadores únicos y el contenido, las portadas y los enlaces de los tres proyectos agregados. El lint del repositorio original tiene 11 errores previos; esta actualización no agrega errores de lint.
+Las pruebas comprueban identificadores únicos, la ubicación de los proyectos principales y la existencia de todas las imágenes y videos del catálogo. El lint del repositorio original tiene 11 errores previos.
 
-Los datos están en `src/data/projectsData.js` y las portadas en `public/projects/`. El workflow existente publica en GitHub Pages al hacer push a `master`.
+Los datos están en `src/data/projectsData.js` y las capturas en `public/projects/`. El workflow existente publica en GitHub Pages al hacer push a `master`.

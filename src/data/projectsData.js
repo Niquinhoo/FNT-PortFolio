@@ -50,6 +50,27 @@ export const featuredProjects = [
       "projects/citax-6.png",
       "projects/citax-7.png"
     ]
+  },  {
+    id: 12,
+    title: "EnergyCell | Servicio Técnico y Gestión",
+    description: "Plataforma para un local de reparación de celulares en Villa Mercedes. Integra presentación de servicios, catálogo de equipos y seguimiento de reparaciones por número de orden, con frontend en React y TypeScript e infraestructura en Cloudflare.",
+    problemSolved: "Permite al cliente consultar el estado de su reparación sin exponer notas internas ni datos privados, y reúne los servicios, equipos y canales de atención del local en un mismo sitio.",
+    tags: ["Servicio Técnico", "React", "TypeScript", "Cloudflare Workers", "TiDB", "R2"],
+    desktopImg: "projects/energycell-1.jpg",
+    mobileImg: "projects/energycell-1.jpg",
+    gallery: ["projects/energycell-1.jpg", "projects/energycell-2.jpg"],
+    liveUrl: "https://energycell-front.nicotrib699.workers.dev/"
+  },
+  {
+    id: 13,
+    title: "Osadía | Marketing y Captación",
+    description: "Landing para una agencia de marketing especializada en fabricantes de muebles a medida. Combina identidad visual, animaciones, presentación del sistema de trabajo y un formulario de evaluación para potenciales clientes.",
+    problemSolved: "Ordena la captación comercial al presentar la propuesta, explicar las condiciones y reunir los datos y objetivos del negocio antes de una reunión de diagnóstico.",
+    tags: ["Landing Page", "React", "GSAP", "TailwindCSS", "Formularios"],
+    desktopImg: "projects/osadia-1.jpg",
+    mobileImg: "projects/osadia-1.jpg",
+    gallery: ["projects/osadia-1.jpg", "projects/osadia-2.jpg"],
+    liveUrl: "https://osadia-landing.vercel.app/"
   },
   {
     id: 4,
@@ -75,8 +96,8 @@ export const featuredProjects = [
     mobileImg: "projects/launchui.png",
     previewVideo: "projects/launchui-preview.mp4",
     gallery: [
-      "projects/launchui-osadia-1.jpg",
-      "projects/launchui-osadia-2.jpg",
+      "projects/launchui-osadia-1.png",
+      "projects/launchui-osadia-2.png",
       "projects/launchui-osadia-3.png",
       "projects/launchui-osadia-4.png",
       "projects/launchui-osadia-5.png",
@@ -92,58 +113,7 @@ export const featuredProjects = [
 ];
 
 export const sideProjects = [
-  {
-    id: 12,
-    title: "EnergyCell | Servicio Técnico y Gestión",
-    description: "Plataforma para un local de reparación de celulares en Villa Mercedes. Integra presentación de servicios, catálogo de equipos y seguimiento de reparaciones por número de orden, con frontend en React y TypeScript e infraestructura en Cloudflare.",
-    problemSolved: "Permite al cliente consultar el estado de su reparación sin exponer notas internas ni datos privados, y reúne los servicios, equipos y canales de atención del local en un mismo sitio.",
-    tags: ["Servicio Técnico", "React", "TypeScript", "Cloudflare Workers", "TiDB", "R2"],
-    desktopImg: "projects/energycell-1.jpg",
-    mobileImg: "projects/energycell-1.jpg",
-    gallery: ["projects/energycell-1.jpg", "projects/energycell-2.jpg"],
-    liveUrl: "https://energycell-front.nicotrib699.workers.dev/"
-  },
-  {
-    id: 13,
-    title: "Osadía | Marketing y Captación",
-    description: "Landing para una agencia de marketing especializada en fabricantes de muebles a medida. Combina identidad visual, animaciones, presentación del sistema de trabajo y un formulario de evaluación para potenciales clientes.",
-    problemSolved: "Ordena la captación comercial al presentar la propuesta, explicar las condiciones y reunir los datos y objetivos del negocio antes de una reunión de diagnóstico.",
-    tags: ["Landing Page", "React", "GSAP", "TailwindCSS", "Formularios"],
-    desktopImg: "projects/osadia-1.jpg",
-    mobileImg: "projects/osadia-1.jpg",
-    gallery: ["projects/osadia-1.jpg", "projects/osadia-2.jpg"],
-    liveUrl: "https://osadia-landing.vercel.app/"
-  },
-  {
-    id: 9,
-    title: "Pediloo | E-commerce y Administración",
-    description: "Tienda online con catálogo, carrito y checkout, acompañada de un dashboard para administrar productos, categorías, usuarios, inventario y estados de pedidos.",
-    problemSolved: "Reúne la experiencia de compra y la gestión del comercio en una misma aplicación, conectada a una API REST con sesiones y persistencia en SQLite.",
-    tags: ["E-commerce", "React", "TypeScript", "Express", "SQLite"],
-    desktopImg: "projects/pediloo.svg",
-    mobileImg: "projects/pediloo.svg",
-    sourceUrl: "https://github.com/Niquinhoo/Final-Web1-React"
-  },
-  {
-    id: 10,
-    title: "Facturador ARCA | Bot de Telegram",
-    description: "Bot en Python para emitir Factura C desde Telegram, generar comprobantes PDF con QR y enviarlos por correo. Incluye notas de crédito, emisión por lotes y resúmenes mensuales.",
-    problemSolved: "Simplifica tareas de facturación para monotributistas desde el chat, con confirmación previa de los comprobantes y un registro consultable en Supabase.",
-    tags: ["Automatización", "Python", "Telegram", "ARCA", "Supabase"],
-    desktopImg: "projects/facturador-arca.svg",
-    mobileImg: "projects/facturador-arca.svg",
-    sourceUrl: "https://github.com/Niquinhoo/facturador-ARCA"
-  },
-  {
-    id: 11,
-    title: "Patrones de Diseño | Java y UML",
-    description: "Proyecto académico con implementaciones ejecutables de Singleton, Observer y Strategy en Java, diagramas UML y un informe que explica los problemas y las decisiones de diseño.",
-    problemSolved: "Conecta la teoría de patrones con ejemplos concretos: configuración compartida, notificaciones de cursos y cálculo de envíos, con comprobaciones integradas y sin dependencias externas.",
-    tags: ["Ingeniería de Software", "Java", "UML", "Singleton", "Observer", "Strategy"],
-    desktopImg: "projects/patrones-diseno.svg",
-    mobileImg: "projects/patrones-diseno.svg",
-    sourceUrl: "https://github.com/Niquinhoo/tp1-patrones-diseno"
-  },
+
   {
     id: 6,
     title: "SplitIt | Fintech Mobile",

@@ -74,15 +74,17 @@ const BorderTrail = ({ radius = 24, isHovered }) => {
 };
 
 const transforms = [
-  { x: "-38vw", y: "12vh", rotate: -12, zIndex: 10, startX: "-4vw", startY: "2vh", startRotate: -3 },
-  { x: "-19vw", y: "4vh", rotate: -6, zIndex: 20, startX: "-2vw", startY: "1vh", startRotate: -1.5 },
+  { x: "-36vw", y: "12vh", rotate: -12, zIndex: 10, startX: "-6vw", startY: "3vh", startRotate: -4.5 },
+  { x: "-24vw", y: "6vh", rotate: -8, zIndex: 20, startX: "-4vw", startY: "2vh", startRotate: -3 },
+  { x: "-12vw", y: "2vh", rotate: -4, zIndex: 25, startX: "-2vw", startY: "1vh", startRotate: -1.5 },
   { x: "0vw", y: "0vh", rotate: 0, zIndex: 30, startX: "0vw", startY: "0vh", startRotate: 0 },
-  { x: "19vw", y: "4vh", rotate: 6, zIndex: 20, startX: "2vw", startY: "1vh", startRotate: 1.5 },
-  { x: "38vw", y: "12vh", rotate: 12, zIndex: 10, startX: "4vw", startY: "2vh", startRotate: 3 },
+  { x: "12vw", y: "2vh", rotate: 4, zIndex: 25, startX: "2vw", startY: "1vh", startRotate: 1.5 },
+  { x: "24vw", y: "6vh", rotate: 8, zIndex: 20, startX: "4vw", startY: "2vh", startRotate: 3 },
+  { x: "36vw", y: "12vh", rotate: 12, zIndex: 10, startX: "6vw", startY: "3vh", startRotate: 4.5 },
 ];
 
 const FeaturedCard = ({ project, index, scrollYProgress, onClick, selectedProjectId, activeTransitionId }) => {
-  const config = transforms[index] || transforms[2];
+  const config = transforms[index];
   const x = useTransform(scrollYProgress, [0, 1], [config.startX, config.x]);
   const y = useTransform(scrollYProgress, [0, 1], [config.startY, config.y]);
   const rotate = useTransform(scrollYProgress, [0, 1], [config.startRotate, config.rotate]);
@@ -108,6 +110,15 @@ const FeaturedCard = ({ project, index, scrollYProgress, onClick, selectedProjec
       }}
     >
       <div 
+        role="button"
+        tabIndex={0}
+        aria-label={`Ver proyecto ${project.title.split(' | ')[0]}`}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            onClick(project);
+          }
+        }}
         onClick={() => onClick(project)}
         onMouseEnter={() => setHasHovered(true)}
         onMouseLeave={() => setHasHovered(false)}
@@ -402,7 +413,7 @@ const Projects = () => {
             <h3 className="font-headline text-5xl font-bold mt-2 text-on-surface">Soluciones que llegaron a producción</h3>
           </div>
 
-          <div className="relative w-[80vw] max-w-[320px] md:max-w-[380px] h-[480px] md:h-[560px] mt-12 md:mt-16">
+          <div className="relative w-[80vw] max-w-[300px] h-[480px] mt-12 md:mt-16">
             {featuredProjects.map((project, index) => (
               <FeaturedCard 
                 key={project.id} 
@@ -435,7 +446,7 @@ const Projects = () => {
         <div className="max-w-7xl mx-auto px-8">
           <div className="mb-16">
             <span className="font-label text-xs uppercase tracking-widest text-secondary">03 — Creative Lab & Side Projects</span>
-            <h3 className="font-headline text-4xl font-bold mt-2 text-on-surface">Proyectos personales y académicos</h3>
+            <h3 className="font-headline text-4xl font-bold mt-2 text-on-surface">Juegos y herramientas</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -514,14 +525,14 @@ const Projects = () => {
               >
                 <h4 className="font-label text-xs uppercase tracking-widest text-secondary mb-3 md:mb-4">Descripción</h4>
                 <p className="text-on-surface-variant leading-relaxed text-sm md:text-lg">{selectedProject.description}</p>
-                {(selectedProject.liveUrl || selectedProject.sourceUrl) && (
+                {selectedProject.liveUrl && (
                   <a
-                    href={selectedProject.liveUrl || selectedProject.sourceUrl}
+                    href={selectedProject.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex mt-4 px-4 py-2 border border-secondary rounded-md text-secondary font-label text-sm hover:bg-secondary hover:text-on-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
                   >
-                    {selectedProject.liveUrl ? 'Visitar sitio web ↗' : 'Ver código en GitHub ↗'}
+                    Visitar sitio web ↗
                   </a>
                 )}
               </div>

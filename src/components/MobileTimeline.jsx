@@ -2,12 +2,6 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { featuredProjects } from '../data/projectsData';
 
-const timelineOrder = ['CalmaVM', 'WillItRain', 'Courtix', 'Citax', 'LaunchUI'];
-
-const timelineProjects = timelineOrder
-  .map(name => featuredProjects.find(p => p.title.includes(name)))
-  .filter(Boolean);
-
 const TimelineNode = ({ project, index, onClick }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
@@ -23,7 +17,7 @@ const TimelineNode = ({ project, index, onClick }) => {
       {/* Timeline column */}
       <div className="flex flex-col items-center pt-1">
         <div className="w-[18px] h-[18px] rounded-full border-[3px] border-primary bg-surface z-10 shrink-0" />
-        {index < timelineProjects.length - 1 && (
+        {index < featuredProjects.length - 1 && (
           <div className="w-[2px] flex-1 bg-primary/20 mt-1" />
         )}
       </div>
@@ -31,6 +25,15 @@ const TimelineNode = ({ project, index, onClick }) => {
       {/* Content */}
       <div className="flex-1 min-w-0">
         <div
+          role="button"
+          tabIndex={0}
+          aria-label={`Ver proyecto ${project.title.split(' | ')[0]}`}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              onClick(project);
+            }
+          }}
           onClick={() => onClick(project)}
           className="bg-surface-container border border-outline rounded-2xl overflow-hidden hover:border-primary transition-all shadow-md active:scale-[0.98]"
         >
@@ -86,7 +89,7 @@ const MobileTimeline = ({ onProjectClick }) => {
           </h3>
         </motion.div>
 
-        {timelineProjects.map((project, index) => (
+        {featuredProjects.map((project, index) => (
           <TimelineNode
             key={project.id}
             project={project}
