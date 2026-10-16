@@ -1,5 +1,23 @@
 export const featuredProjects = [
   {
+    id: 1,
+    title: "Citax",
+    description: "Plataforma SaaS de agendamiento automatizado con agente conversacional de IA vía WhatsApp, capaz de gestionar reservas de forma autónoma en producción.",
+    problemSolved: "Optimiza la operación al automatizar la gestión de turnos, eliminando interrupciones y asegurando una agenda centralizada y sincronizada en tiempo real.",
+    tags: ["Agente IA | SaaS", "LangGraph", "LangChain", "React", "Express", "PostgreSQL", "WhatsApp Business API", "Docker", "AI Agente"],
+    desktopImg: "projects/citax.png",
+    mobileImg: "projects/citax.png",
+    previewVideo: "projects/citax-preview.mp4",
+    gallery: [
+      "projects/citax-1.png",
+      "projects/citax-2.png",
+      "projects/citax-3.png",
+      "projects/citax-4.png",
+      "projects/citax-5.png",
+      "projects/citax-6.png",
+      "projects/citax-7.png"
+    ]
+  },  {
     id: 2,
     title: "Courtix",
     description: "Ecosistema digital para la gestión integral de establecimientos deportivos que automatiza reservas y pagos, optimizando la operación y el rendimiento comercial.",
@@ -33,24 +51,6 @@ export const featuredProjects = [
     ]
   },
   {
-    id: 1,
-    title: "Citax",
-    description: "Plataforma SaaS de agendamiento automatizado con agente conversacional de IA vía WhatsApp, capaz de gestionar reservas de forma autónoma en producción.",
-    problemSolved: "Optimiza la operación al automatizar la gestión de turnos, eliminando interrupciones y asegurando una agenda centralizada y sincronizada en tiempo real.",
-    tags: ["Agente IA | SaaS", "LangGraph", "LangChain", "React", "Express", "PostgreSQL", "WhatsApp Business API", "Docker", "AI Agente"],
-    desktopImg: "projects/citax.png",
-    mobileImg: "projects/citax.png",
-    previewVideo: "projects/citax-preview.mp4",
-    gallery: [
-      "projects/citax-1.png",
-      "projects/citax-2.png",
-      "projects/citax-3.png",
-      "projects/citax-4.png",
-      "projects/citax-5.png",
-      "projects/citax-6.png",
-      "projects/citax-7.png"
-    ]
-  },  {
     id: 12,
     title: "EnergyCell | Servicio Técnico y Gestión",
     description: "Plataforma para un local de reparación de celulares en Villa Mercedes. Integra presentación de servicios, catálogo de equipos y seguimiento de reparaciones por número de orden, con frontend en React y TypeScript e infraestructura en Cloudflare.",

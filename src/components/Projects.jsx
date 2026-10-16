@@ -74,10 +74,10 @@ const BorderTrail = ({ radius = 24, isHovered }) => {
 };
 
 const transforms = [
+  { x: "0vw", y: "0vh", rotate: 0, zIndex: 30, startX: "0vw", startY: "0vh", startRotate: 0 },
   { x: "-36vw", y: "12vh", rotate: -12, zIndex: 10, startX: "-6vw", startY: "3vh", startRotate: -4.5 },
   { x: "-24vw", y: "6vh", rotate: -8, zIndex: 20, startX: "-4vw", startY: "2vh", startRotate: -3 },
   { x: "-12vw", y: "2vh", rotate: -4, zIndex: 25, startX: "-2vw", startY: "1vh", startRotate: -1.5 },
-  { x: "0vw", y: "0vh", rotate: 0, zIndex: 30, startX: "0vw", startY: "0vh", startRotate: 0 },
   { x: "12vw", y: "2vh", rotate: 4, zIndex: 25, startX: "2vw", startY: "1vh", startRotate: 1.5 },
   { x: "24vw", y: "6vh", rotate: 8, zIndex: 20, startX: "4vw", startY: "2vh", startRotate: 3 },
   { x: "36vw", y: "12vh", rotate: 12, zIndex: 10, startX: "6vw", startY: "3vh", startRotate: 4.5 },
@@ -158,7 +158,7 @@ const FeaturedCard = ({ project, index, scrollYProgress, onClick, selectedProjec
         </div>
         
         <div className="px-2 flex flex-col flex-grow relative z-10">
-          <span className="text-[10px] text-secondary font-label tracking-widest uppercase mb-3">0{index + 1} // {project.tags[0]}</span>
+          <span className="text-[10px] text-secondary font-label tracking-widest uppercase mb-3">0{index + 1} // {project.id === 1 ? 'Proyecto insignia' : project.tags[0]}</span>
           <h4 
             style={{ viewTransitionName: getName('project-title') }}
             className="font-headline text-2xl md:text-3xl font-bold mb-3 text-on-surface leading-tight group-hover:text-secondary transition-colors"

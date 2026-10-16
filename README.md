@@ -4,7 +4,7 @@ Portfolio personal construido con React y Vite. Incluye siete proyectos principa
 
 ## Proyectos
 
-Los principales son Courtix, CalmaVM, Citax, EnergyCell, Osadía, WillItRain y LaunchUI. La animación de escritorio presenta las siete tarjetas; la línea de tiempo móvil utiliza el mismo catálogo.
+Citax es el proyecto insignia: ocupa el centro de la animación de escritorio y encabeza la línea de tiempo móvil. Lo acompañan Courtix, CalmaVM, EnergyCell, Osadía, WillItRain y LaunchUI.
 
 EnergyCell y Osadía incluyen dos capturas reales de sus sitios públicos y un enlace para visitarlos. EnergyCell muestra el inicio y el seguimiento de reparaciones; Osadía, el inicio y el sistema de trabajo.
 

@@ -27,6 +27,7 @@ test('EnergyCell y Osadía son proyectos principales con capturas y enlace al si
 
 test('el catálogo conserva siete principales, tres secundarios y todos sus recursos', () => {
   assert.equal(featuredProjects.length, 7);
+  assert.equal(featuredProjects[0].title, 'Citax');
   assert.deepEqual(sideProjects.map(project => project.id), [6, 7, 8]);
   for (const project of [...featuredProjects, ...sideProjects]) {
     assert.ok(![9, 10, 11].includes(project.id));

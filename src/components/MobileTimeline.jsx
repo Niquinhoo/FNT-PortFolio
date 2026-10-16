@@ -46,7 +46,7 @@ const TimelineNode = ({ project, index, onClick }) => {
           </div>
           <div className="p-4">
             <span className="text-[10px] text-secondary font-label tracking-widest uppercase">
-              0{index + 1} // {project.tags[0]}
+              0{index + 1} // {project.id === 1 ? 'Proyecto insignia' : project.tags[0]}
             </span>
             <h4 className="font-headline text-lg font-bold mt-1 mb-1.5 text-on-surface">
               {project.title.split(' | ')[0]}
