@@ -1,5 +1,6 @@
 import React from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
+import { featuredProjects, sideProjects } from '../data/projectsData';
 
 const About = () => {
   return (
@@ -27,7 +28,7 @@ const About = () => {
             <span className="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant mt-4 block font-medium">Años de exp.</span>
           </div>
           <div className="relative">
-            <span className="block text-7xl md:text-8xl font-headline font-bold text-on-surface tracking-tighter">5+</span>
+            <span className="block text-7xl md:text-8xl font-headline font-bold text-on-surface tracking-tighter">{featuredProjects.length + sideProjects.length}</span>
             <span className="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant mt-4 block font-medium">Proyectos</span>
           </div>
         </div>

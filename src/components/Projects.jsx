@@ -175,6 +175,15 @@ const SideProjectCard = ({ project, activeTransitionId, selectedProject, onClick
 
   return (
     <div 
+      role="button"
+      tabIndex={0}
+      aria-label={`Ver proyecto ${project.title.split(' | ')[0]}`}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          onClick(project);
+        }
+      }}
       onClick={() => onClick(project)}
       onMouseEnter={() => setHasHovered(true)}
       onMouseLeave={() => setHasHovered(false)}
@@ -425,8 +434,8 @@ const Projects = () => {
       <div className="py-32 border-b border-outline">
         <div className="max-w-7xl mx-auto px-8">
           <div className="mb-16">
-            <span className="font-label text-xs uppercase tracking-widest text-secondary">03 — Creative Lab & Side Proyects</span>
-            <h3 className="font-headline text-4xl font-bold mt-2 text-on-surface">Juegos y Herramientas</h3>
+            <span className="font-label text-xs uppercase tracking-widest text-secondary">03 — Creative Lab & Side Projects</span>
+            <h3 className="font-headline text-4xl font-bold mt-2 text-on-surface">Proyectos personales y académicos</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -482,6 +491,7 @@ const Projects = () => {
               >
               <button 
                 onClick={handleCloseModal}
+                aria-label="Regresar a proyectos"
                 className="self-start mb-6 md:mb-12 flex items-center gap-2 md:gap-3 text-secondary hover:text-on-surface transition-colors group"
               >
                 <span className="w-8 h-8 rounded-full border border-secondary flex items-center justify-center group-hover:border-on-surface transition-colors">
@@ -504,6 +514,16 @@ const Projects = () => {
               >
                 <h4 className="font-label text-xs uppercase tracking-widest text-secondary mb-3 md:mb-4">Descripción</h4>
                 <p className="text-on-surface-variant leading-relaxed text-sm md:text-lg">{selectedProject.description}</p>
+                {(selectedProject.liveUrl || selectedProject.sourceUrl) && (
+                  <a
+                    href={selectedProject.liveUrl || selectedProject.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex mt-4 px-4 py-2 border border-secondary rounded-md text-secondary font-label text-sm hover:bg-secondary hover:text-on-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary"
+                  >
+                    {selectedProject.liveUrl ? 'Visitar sitio web ↗' : 'Ver código en GitHub ↗'}
+                  </a>
+                )}
               </div>
 
               {selectedProject.problemSolved && (
@@ -546,6 +566,7 @@ const Projects = () => {
                         {selectedProject.gallery.map((_, idx) => (
                           <button
                             key={idx}
+                            aria-label={`Ver imagen ${idx + 1} de ${selectedProject.gallery.length}`}
                             onClick={(e) => {
                               e.stopPropagation();
                               setCurrentGalleryIndex(idx);
@@ -562,6 +583,7 @@ const Projects = () => {
                     {selectedProject.gallery.length > 1 && (
                       <>
                         <button 
+                          aria-label="Imagen anterior"
                           onClick={(e) => {
                             e.stopPropagation();
                             setCurrentGalleryIndex(prev => prev === 0 ? selectedProject.gallery.length - 1 : prev - 1);
@@ -571,6 +593,7 @@ const Projects = () => {
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                         </button>
                         <button 
+                          aria-label="Imagen siguiente"
                           onClick={(e) => {
                             e.stopPropagation();
                             setCurrentGalleryIndex(prev => prev === selectedProject.gallery.length - 1 ? 0 : prev + 1);
