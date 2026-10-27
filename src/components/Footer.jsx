@@ -4,13 +4,13 @@ const Footer = () => {
   return (
     <footer className="bg-surface-container py-24 px-8 border-t border-outline">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-        <div className="font-headline font-bold text-primary text-2xl tracking-tighter">FNT</div>
+        <div className="font-headline font-bold text-primary text-2xl tracking-tighter">Facundo Nicolás Triberti</div>
         <div className="flex flex-wrap justify-center gap-x-12 gap-y-4">
           {[
-            { name: 'LinkedIn', url: '#' },
-            { name: 'GitHub', url: '#' },
-            { name: 'X / Twitter', url: '#' },
-            { name: 'Email', url: 'mailto:hola@nicolas.dev' }
+            { name: 'LinkedIn', url: 'https://www.linkedin.com/in/nicolas-triberti-224651247/' },
+            { name: 'GitHub', url: 'https://github.com/Niquinhoo' },
+            { name: 'Portfolio', url: 'https://niquinhoo.github.io/FNT-PortFolio/' },
+            { name: 'Email', url: 'mailto:nicotrib699@gmail.com' }
           ].map(link => (
             <a 
               key={link.name}
@@ -23,7 +23,7 @@ const Footer = () => {
           ))}
         </div>
         <div className="font-label text-[10px] md:text-xs uppercase tracking-[0.3em] text-on-surface-variant/60 text-center md:text-right">
-          © 2024 Nicolás Triberti. <br className="md:hidden" /> Crafted with precision.
+          © 2026 Facundo Nicolás Triberti.
         </div>
       </div>
     </footer>

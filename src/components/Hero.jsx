@@ -132,10 +132,10 @@ const Hero = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-serif text-[2.2rem] min-[420px]:text-[3rem] min-[520px]:text-[4.5rem] sm:text-[8rem] md:text-[9.5rem] lg:text-[11rem] leading-[0.9] sm:leading-[0.85] tracking-tight text-[#111] dark:text-[#FDFBF7] mb-4 sm:mb-8"
+          className="font-serif text-[2rem] min-[420px]:text-[2.8rem] min-[520px]:text-[3.5rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] leading-[0.95] sm:leading-[0.85] tracking-tight text-[#111] dark:text-[#FDFBF7] mb-4 sm:mb-8 break-words"
         >
-          Nicolás
-          <span className="italic font-normal text-[#D90429]">Triberti</span>
+          <span className="block">Facundo Nicolás</span>{' '}
+          <span className="block italic font-normal text-[#D90429]">Triberti</span>
         </motion.h1>
 
         {/* Separator */}
@@ -153,7 +153,7 @@ const Hero = () => {
           transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="font-inter text-gray-500 max-w-md text-sm sm:text-base leading-relaxed mb-12"
         >
-          Desarrollando herramientas para cuidar tu tiempo
+          Full Stack Developer · Backend · Cloud Infrastructure · DevOps / CI/CD — Argentina
         </motion.p>
 
         {/* CTA row */}

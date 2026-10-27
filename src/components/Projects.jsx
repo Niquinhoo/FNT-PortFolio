@@ -25,7 +25,7 @@ const ProjectIcon = ({ title, hasHovered }) => {
   if (title.includes('Citax')) {
     return <Calendar className="w-5 h-5 text-secondary group-hover:animate-[shake-calendar_0.5s_ease-in-out]" />;
   }
-  if (title.includes('CalmaVM')) {
+  if (title.includes('Calma')) {
     return (
       <ShoppingCart 
         className={`w-5 h-5 text-secondary transition-all duration-700 ${hasHovered ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`} 

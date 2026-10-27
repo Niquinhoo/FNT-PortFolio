@@ -41,7 +41,7 @@ const Contact = () => {
               className="w-20 h-px bg-outline mt-8"
             />
             <motion.p {...stagger(3)} className="mt-8 text-on-surface-variant text-base leading-relaxed max-w-sm">
-              Contame tu idea. Disponible para proyectos freelance, full-time/part-time, pasantías, o simplemente tomar un café y charlar.
+              Me interesan oportunidades como Backend Developer o Full Stack Developer, especialmente en equipos que trabajen con infraestructura cloud, automatización, CI/CD y sistemas orientados a producción.
             </motion.p>
           </div>
 

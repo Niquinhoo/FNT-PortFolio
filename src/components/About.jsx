@@ -10,14 +10,22 @@ const About = () => {
         <div className="lg:col-span-8 space-y-8">
           <span className="font-label text-xs uppercase tracking-widest text-primary">01 — Sobre Mí</span>
           <h2 className="font-headline text-5xl md:text-6xl font-bold leading-tight text-on-surface">
-            Construyo herramientas que te ayudan con{' '}
-            <span className="italic text-primary">tu tiempo</span>
+            Desarrollo soluciones completas para{' '}
+            <span className="italic text-primary">entornos reales</span>
           </h2>
           
           <div className="space-y-6 text-lg text-on-surface-variant leading-relaxed max-w-3xl">
             <p>
-              Soy desarrollador Fullstack orientado a UI/UX en el último año de Programador Universitario de Sistemas. Me enfoco en resolver problemas reales creando ecosistemas digitales completos y en producción (Citax, Courtix, Calma). Mi objetivo es siempre lograr el equilibrio perfecto entre un diseño intuitivo y un backend robusto y escalable.
+              Soy desarrollador de software y estudiante avanzado de Programación Universitaria de Sistemas. Me especializo en construir soluciones completas, con un foco creciente en backend, arquitectura de servicios, infraestructura cloud, bases de datos y automatización de despliegues.
             </p>
+            <p>Trabajo en proyectos que van más allá de la interfaz: diseño APIs, integro servicios externos, modelo datos, despliego aplicaciones y resuelvo problemas de rendimiento, concurrencia y operación en entornos reales.</p>
+            <div className="pt-4 space-y-4">
+              <h3 className="font-label text-xs uppercase tracking-widest text-primary">En qué me enfoco</h3>
+              <p><strong>Backend y datos:</strong> APIs REST, lógica de negocio, integraciones, transacciones, consistencia de datos e idempotencia.</p>
+              <p><strong>Cloud e infraestructura:</strong> despliegues serverless y contenedores, configuración de servicios, almacenamiento y operación sobre Linux.</p>
+              <p><strong>DevOps y calidad:</strong> GitHub Actions, pipelines de CI/CD, pruebas automatizadas, observabilidad y diagnóstico de incidentes.</p>
+              <p><strong>Automatización e IA:</strong> agentes conversacionales, webhooks, tareas programadas e integraciones con plataformas de mensajería.</p>
+            </div>
           </div>
         </div>
 

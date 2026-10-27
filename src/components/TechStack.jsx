@@ -36,34 +36,40 @@ const TechStack = () => {
 
   const stackData = [
     {
-      id: "ui-ux",
-      category: "UI/UX",
-      icon: <Layout className="w-4 h-4" />,
-      items: ["React", "React Native", "Next.js", "Tailwind CSS", "Framer Motion", "Three.js"]
-    },
-    {
-      id: "api",
-      category: "Api",
+      id: "backend",
+      category: "Backend",
       icon: <Server className="w-4 h-4" />,
-      items: ["Node.js", "Express.js", "Python", "Java"]
+      items: ["Node.js", "TypeScript", "JavaScript", "Express", "APIs REST", "Prisma"]
     },
     {
       id: "data",
-      category: "Data",
+      category: "Datos",
       icon: <Database className="w-4 h-4" />,
-      items: ["PostgreSQL", "MySQL", "MongoDB", "Supabase", "Firebase"]
+      items: ["PostgreSQL", "MySQL", "TiDB", "Cloudflare D1"]
     },
     {
       id: "infra",
       category: "Infraestructura",
       icon: <Cpu className="w-4 h-4" />,
-      items: ["AWS", "Docker", "Cloudflare", "GitHub Actions"]
+      items: ["Cloudflare Workers", "Cloudflare R2", "Docker", "Linux", "Vercel"]
     },
     {
-      id: "auto",
-      category: "Automatización",
+      id: "devops",
+      category: "DevOps / calidad",
       icon: <Workflow className="w-4 h-4" />,
-      items: ["Whatsapp-API", "Langgraph", "n8n", "Openclaw", "Hermes", "Agentic LLMs"]
+      items: ["Git", "GitHub Actions", "CI/CD", "Testing", "Linting", "Observabilidad"]
+    },
+    {
+      id: "frontend",
+      category: "Frontend",
+      icon: <Layout className="w-4 h-4" />,
+      items: ["React", "Vite", "Tailwind CSS"]
+    },
+    {
+      id: "integrations",
+      category: "Integraciones",
+      icon: <Workflow className="w-4 h-4" />,
+      items: ["Webhooks", "WhatsApp APIs", "Modelos de IA", "Automatizaciones"]
     }
   ];
 
@@ -88,7 +94,7 @@ const TechStack = () => {
             <span className="text-primary italic font-serif">Técnica</span>
           </h3>
           <p className="mt-8 text-on-surface-variant text-lg leading-relaxed max-w-md">
-            Creo en la construcción de software que se sienta como una artesanía física. Cada capa del stack se maneja con precisión, desde el esquema de la base de datos hasta las micro-interacciones.
+            Diseño y construyo sistemas completos, desde las APIs y los datos hasta la infraestructura, los despliegues y las integraciones.
           </p>
           
           <div className="mt-12 p-6 border border-outline/50 bg-surface-dim/30 backdrop-blur-sm rounded-2xl relative overflow-hidden group max-w-md">
@@ -96,7 +102,7 @@ const TechStack = () => {
             <Terminal className="w-5 h-5 text-primary mb-4" />
             <h4 className="text-sm font-bold uppercase tracking-widest text-on-surface mb-2">Rigor Técnico</h4>
             <p className="text-sm text-on-surface-variant leading-relaxed">
-              El código limpio no es negociable. Priorizo la escalabilidad, el rendimiento y la mantenibilidad en cada línea escrita.
+              Priorizo la confiabilidad, el rendimiento, la calidad y la mantenibilidad en sistemas orientados a producción.
             </p>
           </div>
         </motion.div>
@@ -116,7 +122,7 @@ const TechStack = () => {
               </div>
               
               <motion.div 
-                className="grid grid-cols-2 sm:grid-cols-3 gap-x-1 gap-y-1 pl-4 border-l-2 border-dashed border-outline/20"
+                className="grid grid-cols-2 sm:grid-cols-3 gap-x-1 gap-y-1 pl-4 min-w-0 border-l-2 border-dashed border-outline/20"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
@@ -124,11 +130,11 @@ const TechStack = () => {
               >
                 {section.items.map((tech) => (
                   <motion.div key={tech} variants={itemVariants} className="group relative">
-                    <div className="relative py-4 px-5 overflow-hidden cursor-default">
+                    <div className="relative py-4 px-3 sm:px-5 overflow-hidden cursor-default min-w-0">
                       <div className="absolute inset-0 bg-surface-bright opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0 border border-outline/50"></div>
                       <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top z-10"></div>
                       <div className="relative z-10 flex items-center justify-between gap-3">
-                        <span className="text-sm font-medium text-on-surface-variant group-hover:text-on-surface transition-colors duration-300 font-mono tracking-tight">
+                        <span className="min-w-0 break-words text-sm font-medium text-on-surface-variant group-hover:text-on-surface transition-colors duration-300 font-mono tracking-tight">
                           {tech}
                         </span>
                         <Circle className="w-1.5 h-1.5 text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0" fill="currentColor"/>
