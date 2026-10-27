@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { flushSync } from 'react-dom';
 import { featuredProjects, sideProjects } from '../data/projectsData';
-import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
-import { createTimeline } from 'animejs';
+import { motion as Motion, useScroll, useTransform } from 'framer-motion';
 import { Calendar, ShoppingCart, CloudRain, Rocket, Banknote, Dices, UserSearch } from 'lucide-react';
 import MobileTimeline from './MobileTimeline';
+import ProjectPreview from './ProjectPreview';
 
 const FootballIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -57,7 +57,7 @@ const BorderTrail = ({ radius = 24, isHovered }) => {
   
   return (
     <>
-      <motion.div
+      <Motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500%] aspect-square z-0 pointer-events-none"
@@ -94,7 +94,7 @@ const FeaturedCard = ({ project, index, scrollYProgress, onClick, selectedProjec
   const getName = (base) => (activeTransitionId === project.id && !isSelected) ? `${base}-${project.id}` : 'none';
 
   return (
-    <motion.div 
+    <Motion.div
       className="absolute inset-0"
       style={{ 
         x, 
@@ -121,7 +121,9 @@ const FeaturedCard = ({ project, index, scrollYProgress, onClick, selectedProjec
         }}
         onClick={() => onClick(project)}
         onMouseEnter={() => setHasHovered(true)}
-        onMouseLeave={() => setHasHovered(false)}
+        onMouseLeave={(event) => setHasHovered(event.currentTarget.matches(':focus-within'))}
+        onFocus={() => setHasHovered(true)}
+        onBlur={(event) => setHasHovered(event.currentTarget.matches(':hover'))}
         style={{ viewTransitionName: getName('project-card') }}
         className="w-full h-full bg-surface-container rounded-3xl flex flex-col group shadow-2xl cursor-pointer relative overflow-hidden border border-outline"
       >
@@ -134,13 +136,11 @@ const FeaturedCard = ({ project, index, scrollYProgress, onClick, selectedProjec
               className="w-full aspect-[4/3] overflow-hidden rounded-2xl bg-surface border border-outline relative"
             >
             {project.previewVideo ? (
-              <video 
+              <ProjectPreview
                 style={{ viewTransitionName: getName('project-image') }}
                 src={project.previewVideo}
-                autoPlay
-                muted
-                loop
-                playsInline
+                poster={project.desktopImg}
+                isEngaged={hasHovered && !isSelected}
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
               />
             ) : (
@@ -175,7 +175,7 @@ const FeaturedCard = ({ project, index, scrollYProgress, onClick, selectedProjec
         </div>
         </div>
       </div>
-    </motion.div>
+    </Motion.div>
   );
 };
 
@@ -197,7 +197,9 @@ const SideProjectCard = ({ project, activeTransitionId, selectedProject, onClick
       }}
       onClick={() => onClick(project)}
       onMouseEnter={() => setHasHovered(true)}
-      onMouseLeave={() => setHasHovered(false)}
+      onMouseLeave={(event) => setHasHovered(event.currentTarget.matches(':focus-within'))}
+      onFocus={() => setHasHovered(true)}
+      onBlur={(event) => setHasHovered(event.currentTarget.matches(':hover'))}
       style={{ viewTransitionName: getName('project-card') }}
       className="border border-outline bg-surface-container rounded-2xl flex flex-col group hover:border-secondary cursor-pointer transition-all duration-300 shadow-md relative hover:z-40 hover:shadow-xl hover:shadow-secondary/10 hover:scale-[1.02] overflow-hidden"
     >
@@ -210,13 +212,11 @@ const SideProjectCard = ({ project, activeTransitionId, selectedProject, onClick
             className="w-full aspect-video overflow-hidden rounded-xl bg-surface border border-outline relative"
           >
           {project.previewVideo ? (
-            <video 
+            <ProjectPreview
               style={{ viewTransitionName: getName('project-image') }}
               src={project.previewVideo}
-              autoPlay
-              muted
-              loop
-              playsInline
+              poster={project.desktopImg}
+              isEngaged={hasHovered && !isTransitioning}
               className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
             />
           ) : (
@@ -259,9 +259,6 @@ const SideProjectCard = ({ project, activeTransitionId, selectedProject, onClick
 
 const Projects = () => {
   const containerRef = useRef(null);
-  const bgRef = useRef(null);
-  const textRef = useRef(null);
-  const animeTimeline = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalReady, setIsModalReady] = useState(false);
   const [activeTransitionId, setActiveTransitionId] = useState(null);
@@ -286,34 +283,6 @@ const Projects = () => {
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
-  });
-
-  useEffect(() => {
-    animeTimeline.current = createTimeline({
-      autoplay: false,
-      duration: 1000,
-      easing: 'linear'
-    });
-
-    animeTimeline.current
-      .add({
-        targets: bgRef.current,
-        opacity: [0, 1],
-        duration: 300,
-      }, 0)
-      .add({
-        targets: textRef.current,
-        translateY: ['-50%', '0%'],
-        scale: [0.8, 3],
-        opacity: [0, 0.15],
-        duration: 1000,
-      }, 0);
-  }, []);
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (animeTimeline.current) {
-      animeTimeline.current.seek(animeTimeline.current.duration * latest);
-    }
   });
 
   const handleSelectProject = (project) => {
@@ -394,20 +363,6 @@ const Projects = () => {
         <div id="work" className="absolute top-[300vh]" />
         <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
           
-          {/* Animated Background */}
-          <div 
-            ref={bgRef}
-            className="absolute inset-0 w-full h-full bg-primary opacity-0 pointer-events-none flex items-center justify-center overflow-hidden z-0"
-          >
-            <div 
-              ref={textRef}
-              className="font-headline font-black text-white whitespace-nowrap opacity-0"
-              style={{ fontSize: '15vw', transformOrigin: 'center center' }}
-            >
-              PROYECTOS
-            </div>
-          </div>
-
           <div className="absolute top-24 w-full px-8 max-w-7xl mx-auto left-0 right-0 z-40 pointer-events-none">
             <span className="font-label text-xs uppercase tracking-widest text-secondary">02 — Producción</span>
             <h3 className="font-headline text-5xl font-bold mt-2 text-on-surface">Soluciones que llegaron a producción</h3>
@@ -427,13 +382,13 @@ const Projects = () => {
             ))}
           </div>
 
-          <motion.div 
+          <Motion.div
             className="absolute bottom-12 text-secondary font-label text-[10px] uppercase tracking-widest flex flex-col items-center gap-2"
             style={{ opacity: useTransform(scrollYProgress, [0, 0.1], [1, 0]) }}
           >
             <span>Scroll to unfold</span>
             <div className="w-[1px] h-6 bg-secondary/50 animate-bounce"></div>
-          </motion.div>
+          </Motion.div>
 
         </div>
             </div>
@@ -617,13 +572,11 @@ const Projects = () => {
                     )}
                   </>
                 ) : selectedProject.previewVideo ? (
-                  <video 
+                  <ProjectPreview
                     style={{ viewTransitionName: `project-image-${selectedProject.id}` }}
-                    src={selectedProject.previewVideo} 
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
+                    src={selectedProject.previewVideo}
+                    poster={selectedProject.desktopImg}
+                    forcePlay
                     className="w-full h-full object-contain"
                   />
                 ) : (

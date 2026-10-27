@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { motion, useSpring, useMotionValue } from 'framer-motion';
+import { motion as Motion, useSpring, useMotionValue } from 'framer-motion';
 
 const CustomCursor = () => {
-  const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isDesktop, setIsDesktop] = useState(false);
 
   const shadowX = useMotionValue(-100);
@@ -14,8 +13,9 @@ const CustomCursor = () => {
   useEffect(() => {
     const checkDesktop = () => {
       const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+      const canHover = window.matchMedia('(hover: hover)').matches;
       const isMobileWidth = window.innerWidth < 768;
-      setIsDesktop(hasFinePointer && !isMobileWidth);
+      setIsDesktop(hasFinePointer && canHover && !isMobileWidth);
     };
 
     checkDesktop();
@@ -27,7 +27,6 @@ const CustomCursor = () => {
     if (!isDesktop) return;
 
     const handleMouseMove = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY });
       shadowX.set(e.clientX);
       shadowY.set(e.clientY);
     };
@@ -41,7 +40,7 @@ const CustomCursor = () => {
   return (
     <>
       {/* Outer circle */}
-      <motion.div
+      <Motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border border-red-600"
         style={{
           x: smoothShadowX,
@@ -53,10 +52,13 @@ const CustomCursor = () => {
         }}
       />
       {/* Inner dot */}
-      <div
+      <Motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-red-600"
         style={{
-          transform: `translate(${position.x}px, ${position.y}px) translate(-50%, -50%)`,
+          x: shadowX,
+          y: shadowY,
+          translateX: '-50%',
+          translateY: '-50%',
           width: 12,
           height: 12,
         }}

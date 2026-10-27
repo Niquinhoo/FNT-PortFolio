@@ -1,65 +1,71 @@
 import React, { useEffect, useRef } from 'react';
-import { animate, createTimeline, stagger } from 'animejs';
+import { animate, createScope, stagger } from 'animejs';
+import { useReducedMotion } from 'framer-motion';
 
 const BlueprintBackground = ({ isGlobal = false }) => {
   const containerRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    // Animate dashed lines flowing
-    animate('.blueprint-path', {
-      strokeDashoffset: [100, 0],
-      easing: 'linear',
-      duration: 3000,
-      loop: true
-    });
+    if (prefersReducedMotion) return;
+    const scope = createScope({ root: containerRef }).add(() => {
+      // Animate dashed lines flowing
+      animate('.blueprint-path', {
+        strokeDashoffset: [100, 0],
+        easing: 'linear',
+        duration: 3000,
+        loop: true
+      });
 
     // Pulse glowing nodes
-    animate('.glowing-node', {
-      opacity: [0.3, 1],
-      scale: [0.8, 1.2],
-      easing: 'easeInOutSine',
-      duration: 1500,
-      delay: stagger(200),
-      direction: 'alternate',
-      loop: true
-    });
+      animate('.glowing-node', {
+        opacity: [0.3, 1],
+        scale: [0.8, 1.2],
+        easing: 'easeInOutSine',
+        duration: 1500,
+        delay: stagger(200),
+        direction: 'alternate',
+        loop: true
+      });
 
     // Float floating cursor
-    animate('.floating-cursor', {
-      x: [0, -20, 50, 0],
-      y: [0, 30, -40, 0],
-      easing: 'easeInOutQuad',
-      duration: 4000,
-      loop: true
-    });
+      animate('.floating-cursor', {
+        x: [0, -20, 50, 0],
+        y: [0, 30, -40, 0],
+        easing: 'easeInOutQuad',
+        duration: 4000,
+        loop: true
+      });
 
     // Animate Bezier handles rotating
-    animate('.bezier-handle', {
-      rotate: [0, 15, -15, 0],
-      easing: 'easeInOutSine',
-      duration: 5000,
-      loop: true
-    });
+      animate('.bezier-handle', {
+        rotate: [0, 15, -15, 0],
+        easing: 'easeInOutSine',
+        duration: 5000,
+        loop: true
+      });
 
     // Animate Toggle Switch
-    animate('.toggle-circle', {
-      translateX: [0, 20, 0],
-      easing: 'easeInOutExpo',
-      duration: 2000,
-      loop: true
-    });
+      animate('.toggle-circle', {
+        translateX: [0, 20, 0],
+        easing: 'easeInOutExpo',
+        duration: 2000,
+        loop: true
+      });
 
     // Animate Layers sliding
-    animate('.layer-item', {
-      translateY: (el, i) => [0, -10 * i, 0],
-      opacity: [0.5, 1, 0.5],
-      easing: 'easeInOutSine',
-      duration: 3000,
-      delay: stagger(300),
-      loop: true
+      animate('.layer-item', {
+        translateY: (el, i) => [0, -10 * i, 0],
+        opacity: [0.5, 1, 0.5],
+        easing: 'easeInOutSine',
+        duration: 3000,
+        delay: stagger(300),
+        loop: true
+      });
     });
 
-  }, []);
+    return () => scope.revert();
+  }, [prefersReducedMotion]);
 
   return (
     <div ref={containerRef} className={`${isGlobal ? 'fixed' : 'absolute'} inset-0 overflow-hidden pointer-events-none z-0 opacity-60 transition-opacity duration-1000`}>

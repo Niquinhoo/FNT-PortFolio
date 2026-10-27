@@ -1,13 +1,14 @@
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion as Motion, useInView } from 'framer-motion';
 import { featuredProjects } from '../data/projectsData';
+import ProjectPreview from './ProjectPreview';
 
 const TimelineNode = ({ project, index, onClick }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <motion.div
+    <Motion.div
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -39,7 +40,7 @@ const TimelineNode = ({ project, index, onClick }) => {
         >
           <div className="aspect-video overflow-hidden bg-surface">
             {project.previewVideo ? (
-              <video src={project.previewVideo} autoPlay muted loop playsInline className="w-full h-full object-cover" />
+              <ProjectPreview src={project.previewVideo} poster={project.desktopImg} className="w-full h-full object-cover" />
             ) : (
               <img src={project.desktopImg} alt={project.title} className="w-full h-full object-cover" />
             )}
@@ -64,7 +65,7 @@ const TimelineNode = ({ project, index, onClick }) => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </Motion.div>
   );
 };
 
@@ -75,7 +76,7 @@ const MobileTimeline = ({ onProjectClick }) => {
   return (
     <div ref={sectionRef} className="md:hidden bg-surface py-16 border-b border-outline">
       <div className="max-w-lg mx-auto px-6">
-        <motion.div
+        <Motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isSectionInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -87,7 +88,7 @@ const MobileTimeline = ({ onProjectClick }) => {
           <h3 className="font-headline text-3xl font-bold mt-2 text-on-surface leading-tight">
             Soluciones que llegaron a producción
           </h3>
-        </motion.div>
+        </Motion.div>
 
         {featuredProjects.map((project, index) => (
           <TimelineNode

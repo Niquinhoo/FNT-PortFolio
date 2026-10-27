@@ -22,14 +22,8 @@ function App() {
       smoothWheel: true,
       wheelMultiplier: 1.2,
       lerp: 0.1,
+      autoRaf: true,
     });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
 
     return () => {
       lenis.destroy();
