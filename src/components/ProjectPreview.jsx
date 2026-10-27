@@ -1,20 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { useInView, useReducedMotion } from 'framer-motion';
 
-const ProjectPreview = ({ src, poster, isEngaged = false, forcePlay = false, className, style }) => {
+const ProjectPreview = ({ src, poster, className, style }) => {
   const videoRef = useRef(null);
   const isInView = useInView(videoRef);
   const prefersReducedMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches);
   const [isDocumentVisible, setIsDocumentVisible] = useState(() => document.visibilityState !== 'hidden');
-  const shouldPlay = isInView && isDocumentVisible && !prefersReducedMotion && (forcePlay || (isMobile ? true : isEngaged));
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 767px)');
-    const updateViewport = () => setIsMobile(mediaQuery.matches);
-    mediaQuery.addEventListener('change', updateViewport);
-    return () => mediaQuery.removeEventListener('change', updateViewport);
-  }, []);
+  const shouldPlay = isInView && isDocumentVisible && !prefersReducedMotion;
 
   useEffect(() => {
     const updateVisibility = () => setIsDocumentVisible(document.visibilityState !== 'hidden');
@@ -38,6 +30,7 @@ const ProjectPreview = ({ src, poster, isEngaged = false, forcePlay = false, cla
       src={shouldPlay ? src : undefined}
       poster={poster}
       preload="none"
+      autoPlay
       muted
       loop
       playsInline

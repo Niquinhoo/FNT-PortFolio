@@ -140,7 +140,6 @@ const FeaturedCard = ({ project, index, scrollYProgress, onClick, selectedProjec
                 style={{ viewTransitionName: getName('project-image') }}
                 src={project.previewVideo}
                 poster={project.desktopImg}
-                isEngaged={hasHovered && !isSelected}
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
               />
             ) : (
@@ -216,7 +215,6 @@ const SideProjectCard = ({ project, activeTransitionId, selectedProject, onClick
               style={{ viewTransitionName: getName('project-image') }}
               src={project.previewVideo}
               poster={project.desktopImg}
-              isEngaged={hasHovered && !isTransitioning}
               className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
             />
           ) : (
@@ -576,7 +574,6 @@ const Projects = () => {
                     style={{ viewTransitionName: `project-image-${selectedProject.id}` }}
                     src={selectedProject.previewVideo}
                     poster={selectedProject.desktopImg}
-                    forcePlay
                     className="w-full h-full object-contain"
                   />
                 ) : (
