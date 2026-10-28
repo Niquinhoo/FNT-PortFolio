@@ -32,6 +32,11 @@ function App() {
     lenis.on('scroll', ScrollTrigger.update);
     lenisRef.current = lenis;
 
+    if (window.location.hash === '#work') {
+      const target = document.querySelector('#work');
+      if (target) lenis.scrollTo(target, { immediate: true });
+    }
+
     return () => {
       lenisRef.current = null;
       lenis.off('scroll', ScrollTrigger.update);
