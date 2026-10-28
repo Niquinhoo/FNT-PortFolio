@@ -1,90 +1,26 @@
-import React, { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { animate } from 'animejs';
+import { motion as Motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 
 const Hero = () => {
   const { isDark, toggleTheme } = useTheme();
-
-  const sunCoreRef = useRef(null);
-  const moonMaskRef = useRef(null);
-  const raysRef = useRef(null);
-  const svgRef = useRef(null);
-
-  useEffect(() => {
-    // Anime.js v4 SVG Animation Logic
-    if (!sunCoreRef.current) return;
-
-    if (isDark) {
-      // Animate to Moon
-      animate(sunCoreRef.current, {
-        r: 9,
-        duration: 500,
-        easing: 'outElastic(1, .6)',
-      });
-      animate(moonMaskRef.current, {
-        cx: 16,
-        cy: 6,
-        r: 8,
-        duration: 500,
-        easing: 'outElastic(1, .6)',
-      });
-      animate(raysRef.current, {
-        opacity: 0,
-        rotate: 45,
-        duration: 300,
-        easing: 'outExpo',
-      });
-      animate(svgRef.current, {
-        rotate: -20,
-        duration: 500,
-        easing: 'outElastic(1, .6)',
-      });
-    } else {
-      // Animate to Sun
-      animate(sunCoreRef.current, {
-        r: 5,
-        duration: 500,
-        easing: 'outElastic(1, .6)',
-      });
-      animate(moonMaskRef.current, {
-        cx: 24,
-        cy: 0,
-        r: 8,
-        duration: 500,
-        easing: 'outElastic(1, .6)',
-      });
-      animate(raysRef.current, {
-        opacity: 1,
-        rotate: 0,
-        duration: 500,
-        easing: 'outElastic(1, .6)',
-      });
-      animate(svgRef.current, {
-        rotate: 0,
-        duration: 500,
-        easing: 'outElastic(1, .6)',
-      });
-    }
-  }, [isDark]);
 
   return (
     <section
       id="hero"
       className="relative min-h-screen flex flex-col items-start justify-end px-6 sm:px-12 pb-20 sm:pb-32 lg:pb-40 bg-[#FDFBF7]/10 dark:bg-[#0a0a0a]/10 backdrop-blur-sm overflow-hidden font-sans transition-colors duration-700"
     >
-      {/* ── THEME TOGGLE: SVG + Anime.js Version ── */}
+      {/* ── THEME TOGGLE ── */}
       <div className="absolute top-[10%] right-[5%] sm:right-[10%] z-20">
         <button
           onClick={toggleTheme}
-          className="relative w-20 h-20 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 flex flex-col items-center justify-center group focus:outline-none"
+          className="relative w-20 h-20 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 flex flex-col items-center justify-center group rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D90429] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FDFBF7] dark:focus-visible:ring-offset-[#0a0a0a]"
           aria-label="Toggle theme"
+          aria-pressed={isDark}
         >
           {/* Ambient Glow */}
           <div className="absolute inset-0 rounded-full bg-red-500/5 blur-3xl group-hover:bg-red-500/10 transition-colors duration-500" />
           
           <svg 
-            ref={svgRef}
             className="theme-toggle-svg text-[#E67E22] dark:text-[#FDFBF7] drop-shadow-2xl transition-colors duration-500" 
             width="100%" 
             height="100%" 
@@ -94,14 +30,14 @@ const Hero = () => {
             strokeWidth="2" 
             strokeLinecap="round" 
             strokeLinejoin="round"
-            style={{ transformOrigin: 'center' }}
+            style={{ transformOrigin: 'center', transform: isDark ? 'rotate(-20deg)' : 'rotate(0deg)' }}
           >
             <mask id="moon-mask">
               <rect x="0" y="0" width="24" height="24" fill="white" />
-              <circle ref={moonMaskRef} className="moon-mask-circle" cx="24" cy="0" r="8" fill="black" />
+              <circle className="moon-mask-circle" cx={isDark ? 16 : 24} cy={isDark ? 6 : 0} r="8" fill="black" />
             </mask>
-            <circle ref={sunCoreRef} className="sun-core" cx="12" cy="12" r="5" mask="url(#moon-mask)" fill="currentColor" />
-            <g ref={raysRef} className="sun-rays" stroke="currentColor" style={{ transformOrigin: 'center' }}>
+            <circle className="sun-core" cx="12" cy="12" r={isDark ? 9 : 5} mask="url(#moon-mask)" fill="currentColor" />
+            <g className="sun-rays" stroke="currentColor" style={{ transformOrigin: 'center', opacity: isDark ? 0 : 1, transform: isDark ? 'rotate(45deg)' : 'rotate(0deg)' }}>
               <line x1="12" y1="1" x2="12" y2="3" />
               <line x1="12" y1="21" x2="12" y2="23" />
               <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
@@ -128,7 +64,7 @@ const Hero = () => {
 
 
         {/* Name */}
-        <motion.h1
+        <Motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -136,10 +72,10 @@ const Hero = () => {
         >
           <span className="block sm:inline">Nicolás</span>{' '}
           <span className="block sm:inline italic font-normal text-[#D90429]">Triberti</span>
-        </motion.h1>
+        </Motion.h1>
 
         {/* Separator */}
-        <motion.div
+        <Motion.div
           initial={{ scaleX: 0, originX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -147,17 +83,17 @@ const Hero = () => {
         />
 
         {/* Description */}
-        <motion.p
+        <Motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="font-inter text-gray-500 max-w-md text-sm sm:text-base leading-relaxed mb-12"
         >
           Full Stack Developer · Backend · Cloud Infrastructure · DevOps / CI/CD — Argentina
-        </motion.p>
+        </Motion.p>
 
         {/* CTA row */}
-        <motion.div
+        <Motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
@@ -195,12 +131,12 @@ const Hero = () => {
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#D90429] transition-colors duration-200">LinkedIn</a>
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#D90429] transition-colors duration-200">GitHub</a>
           </div> */}
-        </motion.div>
+        </Motion.div>
 
       </div>
 
       {/* ── SCROLL INDICATOR ── */}
-      <motion.div
+      <Motion.div
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute bottom-10 left-6 sm:left-12"
@@ -214,7 +150,7 @@ const Hero = () => {
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
         </svg>
-      </motion.div>
+      </Motion.div>
     </section>
   );
 };

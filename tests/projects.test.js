@@ -11,7 +11,7 @@ test('todos los proyectos tienen un identificador único', () => {
 test('EnergyCell y Osadía son proyectos principales con capturas y enlace al sitio', () => {
   for (const [title, liveUrl] of [
     ['EnergyCell', 'https://energycell-front.nicotrib699.workers.dev/'],
-    ['Osadía', 'https://osadia-landing.vercel.app/'],
+    ['Osadía', 'https://www.osadiamarketing.com/'],
   ]) {
     const project = featuredProjects.find(item => item.title.startsWith(`${title} | `));
     assert.ok(project, title);

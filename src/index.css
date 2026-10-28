@@ -1,6 +1,14 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
+@font-face {
+  font-family: 'SF UI Text';
+  src: url('./assets/fonts/SFUIText-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
   --surface: #FBFBFA;
   --surface-dim: #F7F6F3;
@@ -18,7 +26,6 @@
   --on-secondary: #FFFFFF;
   --outline: #EAEAEA;
   --outline-variant: rgba(0,0,0,0.06);
-  --blueprint-grid: #D6CFC4;
   --blueprint-stroke: #B8AE9D;
   --blueprint-blob: #D90429;
 }
@@ -40,26 +47,58 @@
   --on-secondary: #FFFFFF;
   --outline: #333333;
   --outline-variant: rgba(255,255,255,0.1);
-  --blueprint-grid: #2a2a2a;
   --blueprint-stroke: #444444;
   --blueprint-blob: #FF1A3D;
-}
-
-* {
-  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
-}
-
-@media (hover: hover) and (pointer: fine) and (min-width: 768px) {
-  * {
-    cursor: none !important;
-  }
 }
 
 body {
   background-color: var(--surface);
   color: var(--on-surface);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'SF UI Text', sans-serif;
   line-height: 1.6;
+}
+
+.theme-toggle-svg {
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1), color 500ms ease;
+}
+
+.theme-toggle-svg .sun-core {
+  transition: r 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-toggle-svg .moon-mask-circle {
+  transition: cx 500ms cubic-bezier(0.22, 1, 0.36, 1), cy 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-toggle-svg .sun-rays {
+  transition: opacity 250ms ease, transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle-svg,
+  .theme-toggle-svg .sun-core,
+  .theme-toggle-svg .moon-mask-circle,
+  .theme-toggle-svg .sun-rays {
+    transition: none;
+  }
+}
+
+section[id],
+.projects-anchor {
+  scroll-margin-top: 6rem;
+}
+
+.projects-anchor {
+  position: absolute;
+  top: 300vh;
+  width: 0;
+  height: 0;
+}
+
+@media (max-width: 767px) {
+  .projects-anchor {
+    position: static;
+  }
 }
 
 /* Minimalist selection */

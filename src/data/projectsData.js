@@ -16,7 +16,8 @@ export const featuredProjects = [
       "projects/citax-5.png",
       "projects/citax-6.png",
       "projects/citax-7.png"
-    ]
+    ],
+    liveUrl: "https://www.citax.com.ar/"
   },  {
     id: 2,
     title: "Courtix",
@@ -70,7 +71,7 @@ export const featuredProjects = [
     desktopImg: "projects/osadia-1.jpg",
     mobileImg: "projects/osadia-1.jpg",
     gallery: ["projects/osadia-1.jpg", "projects/osadia-2.jpg"],
-    liveUrl: "https://osadia-landing.vercel.app/"
+    liveUrl: "https://www.osadiamarketing.com/"
   },
   {
     id: 4,

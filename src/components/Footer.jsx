@@ -1,9 +1,10 @@
 import React from 'react';
+import AnimatedContent from './AnimatedContent';
 
 const Footer = () => {
   return (
     <footer className="bg-surface-container py-24 px-8 border-t border-outline">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+      <AnimatedContent distance={40} threshold={0} className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
         <div className="font-headline font-bold text-primary text-2xl tracking-tighter">Facundo Nicolás Triberti</div>
         <div className="flex flex-wrap justify-center gap-x-12 gap-y-4">
           {[
@@ -25,7 +26,7 @@ const Footer = () => {
         <div className="font-label text-[10px] md:text-xs uppercase tracking-[0.3em] text-on-surface-variant/60 text-center md:text-right">
           © 2026 Facundo Nicolás Triberti.
         </div>
-      </div>
+      </AnimatedContent>
     </footer>
   );
 };

@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { flushSync } from 'react-dom';
+import { createPortal, flushSync } from 'react-dom';
 import { featuredProjects, sideProjects } from '../data/projectsData';
 import { motion as Motion, useScroll, useTransform } from 'framer-motion';
 import { Calendar, ShoppingCart, CloudRain, Rocket, Banknote, Dices, UserSearch } from 'lucide-react';
 import MobileTimeline from './MobileTimeline';
 import ProjectPreview from './ProjectPreview';
+import AnimatedContent from './AnimatedContent';
 
 const FootballIcon = ({ className }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -200,7 +201,7 @@ const SideProjectCard = ({ project, activeTransitionId, selectedProject, onClick
       onFocus={() => setHasHovered(true)}
       onBlur={(event) => setHasHovered(event.currentTarget.matches(':hover'))}
       style={{ viewTransitionName: getName('project-card') }}
-      className="border border-outline bg-surface-container rounded-2xl flex flex-col group hover:border-secondary cursor-pointer transition-all duration-300 shadow-md relative hover:z-40 hover:shadow-xl hover:shadow-secondary/10 hover:scale-[1.02] overflow-hidden"
+      className="h-full border border-outline bg-surface-container rounded-2xl flex flex-col group hover:border-secondary cursor-pointer transition-all duration-300 shadow-md relative hover:z-40 hover:shadow-xl hover:shadow-secondary/10 hover:scale-[1.02] overflow-hidden"
     >
       <BorderTrail radius={16} isHovered={hasHovered} />
       
@@ -255,7 +256,7 @@ const SideProjectCard = ({ project, activeTransitionId, selectedProject, onClick
   );
 };
 
-const Projects = () => {
+const Projects = ({ onModalChange }) => {
   const containerRef = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalReady, setIsModalReady] = useState(false);
@@ -340,31 +341,34 @@ const Projects = () => {
   };
 
   useEffect(() => {
+    const bodyOverflow = document.body.style.overflow;
+    const bodyPaddingRight = document.body.style.paddingRight;
     if (selectedProject) {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = 'hidden';
       document.body.style.paddingRight = `${scrollbarWidth}px`;
+      onModalChange(true);
     } else {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '0px';
+      onModalChange(false);
     }
     return () => {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '0px';
+      document.body.style.overflow = bodyOverflow;
+      document.body.style.paddingRight = bodyPaddingRight;
+      if (selectedProject) onModalChange(false);
     };
-  }, [selectedProject]);
+  }, [selectedProject, onModalChange]);
 
   return (
     <section className="bg-transparent relative z-10">
+      <div id="work" className="projects-anchor" aria-hidden="true" />
       {/* The Scroll Animation Section */}
       <div ref={containerRef} className="relative h-[400vh] w-full border-b border-outline hidden md:block">
-        <div id="work" className="absolute top-[300vh]" />
         <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
           
-          <div className="absolute top-24 w-full px-8 max-w-7xl mx-auto left-0 right-0 z-40 pointer-events-none">
+          <AnimatedContent distance={40} className="absolute top-24 w-full px-8 max-w-7xl mx-auto left-0 right-0 z-40 pointer-events-none">
             <span className="font-label text-xs uppercase tracking-widest text-secondary">02 — Producción</span>
             <h3 className="font-headline text-5xl font-bold mt-2 text-on-surface">Soluciones que llegaron a producción</h3>
-          </div>
+          </AnimatedContent>
 
           <div className="relative w-[80vw] max-w-[300px] h-[480px] mt-12 md:mt-16">
             {featuredProjects.map((project, index) => (
@@ -397,28 +401,29 @@ const Projects = () => {
 }
       <div className="py-32 border-b border-outline">
         <div className="max-w-7xl mx-auto px-8">
-          <div className="mb-16">
+          <AnimatedContent distance={40} className="mb-16">
             <span className="font-label text-xs uppercase tracking-widest text-secondary">03 — Creative Lab & Side Projects</span>
             <h3 className="font-headline text-4xl font-bold mt-2 text-on-surface">Juegos y herramientas</h3>
-          </div>
+          </AnimatedContent>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {sideProjects.map((project) => (
+              <AnimatedContent key={project.id} distance={40} className="min-w-0">
               <SideProjectCard 
-                key={project.id}
                 project={project}
                 activeTransitionId={activeTransitionId}
                 selectedProject={selectedProject}
                 onClick={handleSelectProject}
               />
+              </AnimatedContent>
             ))}
           </div>
         </div>
       </div>
 
       {/* Project Details Modal - Rendered Conditionally without AnimatePresence */}
-      {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-12">
+      {selectedProject && createPortal((
+        <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 md:p-12">
           {/* Backdrop */}
           <div
             onClick={handleCloseModal}
@@ -427,11 +432,11 @@ const Projects = () => {
           
           <div
             style={{ viewTransitionName: `project-card-${selectedProject.id}` }}
-            className="w-full max-w-[95vw] xl:max-w-[1400px] bg-surface-container border border-outline rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row min-h-[400px] md:min-h-[500px] max-h-[90vh] md:max-h-[85vh] relative z-10 pointer-events-auto"
+            className="w-full max-w-[95vw] xl:max-w-[1400px] bg-surface-container border border-outline rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row min-h-0 h-[85dvh] max-h-[90dvh] relative z-10 pointer-events-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Left/Center Section: Text */}
-            <div className="w-full lg:w-[40%] xl:w-[35%] relative group/scroll overflow-hidden border-r border-outline">
+            <div className="w-full lg:w-[40%] xl:w-[35%] relative group/scroll overflow-hidden border-r border-outline min-h-0 max-h-[50%] lg:max-h-none lg:h-full flex flex-col">
               {/* Scroll Nav Buttons - Centered and visible on hover */}
               <button 
                 onClick={scrollToTop}
@@ -451,7 +456,8 @@ const Projects = () => {
 
               <div 
                 ref={modalScrollRef}
-                className="w-full h-full p-5 md:p-8 lg:p-16 flex flex-col overflow-y-auto no-scrollbar"
+                data-lenis-prevent
+                className="w-full flex-1 min-h-0 p-5 md:p-8 lg:p-16 flex flex-col overflow-y-auto overscroll-contain no-scrollbar"
               >
               <button 
                 onClick={handleCloseModal}
@@ -511,7 +517,7 @@ const Projects = () => {
           </div>
           
           {/* Right Section: Media */}
-            <div className="w-full lg:w-[60%] xl:w-[65%] bg-surface relative min-h-[200px] md:min-h-[300px] border-t lg:border-t-0 lg:border-l border-outline p-2 md:p-4 lg:p-8 flex items-center justify-center">
+            <div className="w-full lg:w-[60%] xl:w-[65%] bg-surface relative flex-1 min-h-0 border-t lg:border-t-0 lg:border-l border-outline p-2 md:p-4 lg:p-8 flex items-center justify-center">
               <div 
                 style={{ viewTransitionName: `project-image-container-${selectedProject.id}` }}
                 className="w-full h-full rounded-2xl overflow-hidden border border-outline relative group bg-surface-container flex items-center justify-center"
@@ -588,7 +594,7 @@ const Projects = () => {
             </div>
           </div>
         </div>
-      )}
+      ), document.body)}
     </section>
   );
 };

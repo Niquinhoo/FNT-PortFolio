@@ -1,18 +1,11 @@
-import { useRef } from 'react';
-import { motion as Motion, useInView } from 'framer-motion';
 import { featuredProjects } from '../data/projectsData';
 import ProjectPreview from './ProjectPreview';
+import AnimatedContent from './AnimatedContent';
 
 const TimelineNode = ({ project, index, onClick }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
-
   return (
-    <Motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+    <AnimatedContent
+      distance={40}
       className="flex gap-5 pb-16 last:pb-0"
     >
       {/* Timeline column */}
@@ -65,30 +58,22 @@ const TimelineNode = ({ project, index, onClick }) => {
           </div>
         </div>
       </div>
-    </Motion.div>
+    </AnimatedContent>
   );
 };
 
 const MobileTimeline = ({ onProjectClick }) => {
-  const sectionRef = useRef(null);
-  const isSectionInView = useInView(sectionRef, { once: true, margin: '-40px' });
-
   return (
-    <div ref={sectionRef} className="md:hidden bg-surface py-16 border-b border-outline">
+    <div className="md:hidden bg-surface py-16 border-b border-outline">
       <div className="max-w-lg mx-auto px-6">
-        <Motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isSectionInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-10"
-        >
+        <AnimatedContent distance={40} className="mb-10">
           <span className="font-label text-xs uppercase tracking-widest text-secondary">
             02 — Producción
           </span>
           <h3 className="font-headline text-3xl font-bold mt-2 text-on-surface leading-tight">
             Soluciones que llegaron a producción
           </h3>
-        </Motion.div>
+        </AnimatedContent>
 
         {featuredProjects.map((project, index) => (
           <TimelineNode

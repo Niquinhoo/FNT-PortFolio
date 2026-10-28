@@ -28,28 +28,11 @@ const BlueprintBackground = ({ isGlobal = false }) => {
         loop: true
       });
 
-    // Float floating cursor
-      animate('.floating-cursor', {
-        x: [0, -20, 50, 0],
-        y: [0, 30, -40, 0],
-        easing: 'easeInOutQuad',
-        duration: 4000,
-        loop: true
-      });
-
     // Animate Bezier handles rotating
       animate('.bezier-handle', {
         rotate: [0, 15, -15, 0],
         easing: 'easeInOutSine',
         duration: 5000,
-        loop: true
-      });
-
-    // Animate Toggle Switch
-      animate('.toggle-circle', {
-        translateX: [0, 20, 0],
-        easing: 'easeInOutExpo',
-        duration: 2000,
         loop: true
       });
 
@@ -78,16 +61,6 @@ const BlueprintBackground = ({ isGlobal = false }) => {
         <rect width="100%" height="100%" filter="url(#noiseFilter)" />
       </svg>
 
-      {/* Grid Pattern */}
-      <svg className="absolute inset-0 w-full h-full opacity-70" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="var(--blueprint-grid)" strokeWidth="1"/>
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#grid)" />
-      </svg>
-        
       <svg className="absolute inset-0 w-full h-full opacity-80" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
         {/* Wireframe Elements */}
         <g stroke="var(--blueprint-stroke)" strokeWidth="1" fill="none">
@@ -126,11 +99,6 @@ const BlueprintBackground = ({ isGlobal = false }) => {
             <rect className="layer-item" x="0" y="0" width="60" height="30" rx="2" stroke="var(--blueprint-stroke)" />
           </g>
 
-          {/* Toggle Switch */}
-          <g transform="translate(450, 150)">
-             <rect x="0" y="0" width="50" height="26" rx="13" stroke="var(--blueprint-stroke)" />
-             <circle className="toggle-circle" cx="13" cy="13" r="8" fill="var(--primary)" opacity="0.6" />
-          </g>
         </g>
 
         {/* Bezier Curve & Handles */}
@@ -165,18 +133,6 @@ const BlueprintBackground = ({ isGlobal = false }) => {
       <div className="absolute bottom-[25%] left-[45%] w-56 h-32 bg-primary rounded-full mix-blend-multiply dark:mix-blend-screen blur-[90px] opacity-10 dark:opacity-5 pointer-events-none"></div>
       <div className="absolute top-[25%] right-[20%] w-24 h-24 bg-primary rounded-full mix-blend-multiply dark:mix-blend-screen blur-[70px] opacity-15 dark:opacity-10 pointer-events-none"></div>
       <div className="absolute bottom-[15%] right-[25%] w-20 h-20 bg-primary rounded-full mix-blend-multiply dark:mix-blend-screen blur-[60px] opacity-10 dark:opacity-5 pointer-events-none"></div>
-      
-      {/* Floating Hand Cursor */}
-      <div className="absolute top-[35%] left-[25%] floating-cursor z-10 opacity-70">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0" />
-          <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0" />
-          <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0" />
-          <path d="M18 11a2 2 0 1 1 4 0v3.5a8 8 0 0 1-8 8h-2a8 8 0 0 1-8-8v-3.5a2 2 0 1 1 4 0" />
-          <path d="M6 11v1" />
-        </svg>
-        <div className="absolute -inset-4 bg-primary/20 rounded-full blur-xl -z-10"></div>
-      </div>
       
     </div>
   );

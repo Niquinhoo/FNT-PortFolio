@@ -1,147 +1,102 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import ThemeToggle from './ThemeToggle';
+import { motion as Motion, useScroll, useTransform } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import PillNav from './PillNav';
+import { useTheme } from '../context/ThemeContext';
 
-const TypingLogo = () => {
-  const fullText = "FNicolasTriberti";
-  const baseText = "FNT";
-  const [displayText, setDisplayText] = useState(baseText);
-  const [phase, setPhase] = useState('idle'); // 'idle', 'deleting_to_f', 'typing_full', 'waiting_full', 'deleting_to_base'
-
-  useEffect(() => {
-    let timeout;
-
-    if (phase === 'idle') {
-      timeout = setTimeout(() => setPhase('deleting_to_f'), 3000);
-    } else if (phase === 'deleting_to_f') {
-      if (displayText.length > 1) {
-        timeout = setTimeout(() => {
-          setDisplayText(displayText.slice(0, -1));
-        }, 100);
-      } else {
-        setPhase('typing_full');
-      }
-    } else if (phase === 'typing_full') {
-      if (displayText.length < fullText.length) {
-        timeout = setTimeout(() => {
-          setDisplayText(fullText.slice(0, displayText.length + 1));
-        }, 80);
-      } else {
-        setPhase('waiting_full');
-      }
-    } else if (phase === 'waiting_full') {
-      timeout = setTimeout(() => setPhase('deleting_to_base'), 2500);
-    } else if (phase === 'deleting_to_base') {
-      if (displayText.length > baseText.length) {
-        timeout = setTimeout(() => {
-          setDisplayText(displayText.slice(0, -1));
-        }, 50);
-      } else {
-        if (displayText === baseText) {
-          setPhase('idle');
-        } else {
-           if (displayText.length > 0) {
-             timeout = setTimeout(() => setDisplayText(displayText.slice(0, -1)), 50);
-           } else {
-             setPhase('typing_base');
-           }
-        }
-      }
-    } else if (phase === 'typing_base') {
-      if (displayText.length < baseText.length) {
-        timeout = setTimeout(() => setDisplayText(baseText.slice(0, displayText.length + 1)), 100);
-      } else {
-        setPhase('idle');
-      }
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayText, phase]);
-
-  return (
-    <div className="flex items-center gap-0.5 font-headline font-bold text-2xl tracking-tighter relative pr-2 md:pr-16 lg:pr-24">
-      {/* Hidden spacer to reserve width — desktop only */}
-      <span className="opacity-0 pointer-events-none select-none overflow-hidden hidden md:block">
-        {fullText}
-      </span>
-      
-      {/* Absolute positioned visible text */}
-      <div className="absolute left-0 flex items-center">
-        <span className="text-primary whitespace-nowrap">{displayText}</span>
-        <motion.span 
-          animate={{ opacity: [1, 0] }}
-          transition={{ duration: 0.8, repeat: Infinity, ease: "steps(2)" }}
-          className="w-[2px] h-6 bg-primary inline-block ml-0.5"
-        />
-      </div>
-    </div>
-  );
-};
-
+const items = [
+  { label: 'Sobre mí', href: '#about' },
+  { label: 'Proyectos', href: '#work' },
+  { label: 'Habilidades', href: '#process' },
+  { label: 'Contacto', href: '#contact' }
+];
 
 const Navbar = () => {
   const { scrollYProgress } = useScroll();
-  
-  // Progress value for the conic gradient border
-  const progressPercent = useTransform(scrollYProgress, [0, 0.9], ["0%", "100%"]);
-  
-  // Transform the scroll position into a glowing shadow
-  const boxShadow = useTransform(
-    scrollYProgress,
-    [0, 0.7, 1],
-    [
-      '0px 4px 10px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(234, 234, 234, 0.4)',
-      '0px 4px 20px rgba(217, 4, 41, 0.1), 0 0 0 1px rgba(217, 4, 41, 0.2)',
-      '0px 4px 30px rgba(217, 4, 41, 0.3), 0 0 0 1px rgba(217, 4, 41, 0.2)'
-    ]
-  );
+  const { isDark } = useTheme();
+  const [activeHref, setActiveHref] = useState(null);
+  const progressPercent = useTransform(scrollYProgress, [0, 0.9], ['0%', '100%']);
+
+  useEffect(() => {
+    let frame = 0;
+    const sections = items.map(({ href }) => {
+      const target = document.querySelector(href);
+      return { href, section: href === '#work' ? target?.closest('section') : target };
+    }).filter(({ section }) => section);
+
+    const update = () => {
+      frame = 0;
+      const referenceY = window.innerHeight * 0.3;
+      let next = null;
+      sections.forEach(({ href, section }) => {
+        if (section.getBoundingClientRect().top <= referenceY) next = href;
+      });
+      setActiveHref(current => current === next ? current : next);
+    };
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(schedule);
+    sections.forEach(({ section }) => observer?.observe(section));
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    window.addEventListener('hashchange', schedule);
+    window.addEventListener('pageshow', schedule);
+    schedule();
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer?.disconnect();
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      window.removeEventListener('hashchange', schedule);
+      window.removeEventListener('pageshow', schedule);
+    };
+  }, []);
 
   return (
-    <motion.nav 
-      style={{ boxShadow }}
-      className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-5xl rounded-full liquid-glass flex justify-between items-center px-4 md:px-10 py-3 md:py-4 z-[9999] transition-colors duration-300"
+    <Motion.header
+      className="portfolio-navbar fixed top-4 left-1/2 -translate-x-1/2 flex w-fit max-w-[calc(100vw-1rem)] items-center justify-center rounded-full px-2 py-2 z-[9999]"
     >
-      {/* Animated Red Border */}
-      <motion.div 
-        className="absolute inset-0 rounded-full pointer-events-none"
-        style={{
-          background: "conic-gradient(from 270deg at 50% 50%, #D90429 var(--progress), transparent 0)",
-          padding: "2px",
-          WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-          WebkitMaskComposite: "xor",
-          maskComposite: "exclude",
-          "--progress": progressPercent,
-        }}
-      />
-
-      <TypingLogo />
-      
-      <div className="hidden lg:flex gap-10 items-center">
-        {[
-          { name: 'Sobre Mí', href: '#about' },
-          { name: 'Proyectos', href: '#work' },
-          { name: 'Habilidades', href: '#process' }
-        ].map((item, idx) => (
-          <a 
-            key={item.name}
-            className={`text-xs uppercase tracking-[0.3em] font-label transition-all duration-300 hover:text-primary relative z-10 ${idx === 0 ? "text-secondary font-bold" : "text-on-surface-variant"}`} 
-            href={item.href}
-          >
-            {item.name}
-          </a>
-        ))}
+      <div className="relative z-10 flex w-fit max-w-full items-center justify-center">
+        <div className="portfolio-navbar__pillnav min-w-0 max-w-full flex-[0_1_auto]">
+          <PillNav
+            className="w-fit max-w-full"
+            logo={(
+              <span className="flex h-full w-full min-w-0 items-center justify-center whitespace-nowrap font-headline text-[19.5px] font-bold leading-none tracking-[-0.08em]">
+                <span className="inline-flex w-max shrink-0 items-center justify-center"><span className={isDark ? 'text-white' : 'text-black'}>FN</span><span className="text-primary">T</span></span>
+              </span>
+            )}
+            logoAlt="Inicio — FNT"
+            logoHref="#"
+            items={items}
+            theme={isDark ? 'dark' : 'light'}
+            layout="split"
+            itemStyle="pill"
+            hoverEffect="fill"
+            indicator="dot"
+            surface="glass"
+            size="lg"
+            activeHref={activeHref}
+            highlightColor={isDark ? '#F4F4F5' : '#18181B'}
+            highlightTextColor={isDark ? '#121016' : '#FFFFFF'}
+            collapse="auto"
+            ariaLabel="Navegación principal"
+            style={{
+              '--progress': progressPercent,
+              '--pn-pill': isDark ? '#FF1A3D' : '#D90429',
+              '--pn-pill-ink': '#FFFFFF',
+              '--pn-h': '54px',
+              '--pn-pad': '4.5px',
+              '--pn-inner': '45px',
+              '--pn-x': '18px',
+              '--pn-font': '19.5px',
+              '--pn-gap': '9px',
+              '--pn-mark': '27px'
+            }}
+          />
+        </div>
       </div>
-
-      <div className="flex items-center gap-4 relative z-10">
-        <ThemeToggle />
-          <a 
-            href="#contact"
-            className="bg-primary text-on-primary px-5 py-2 md:px-8 md:py-2.5 text-[10px] md:text-xs font-label uppercase tracking-[0.2em] hover:bg-on-surface hover:text-surface transition-all duration-500 rounded-full shadow-md hover:shadow-primary/20"
-          >
-          Contacto
-        </a>
-      </div>
-    </motion.nav>
+    </Motion.header>
   );
 };
 

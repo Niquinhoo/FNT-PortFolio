@@ -27,3 +27,4 @@ dist-ssr
 .claude
 .qwen
 skills
+/skills-lock.json

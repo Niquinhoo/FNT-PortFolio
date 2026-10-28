@@ -66,13 +66,13 @@ export default {
         "full": "9999px"
       },
       "fontFamily": {
-        "headline": ["Playfair Display", "serif"],
-        "serif": ["Playfair Display", "serif"],
-        "sans": ["Inter", "sans-serif"],
-        "body": ["Inter", "sans-serif"],
-        "label": ["Inter", "sans-serif"],
+        "headline": ["SF UI Text", "sans-serif"],
+        "serif": ["SF UI Text", "sans-serif"],
+        "sans": ["SF UI Text", "sans-serif"],
+        "body": ["SF UI Text", "sans-serif"],
+        "label": ["SF UI Text", "sans-serif"],
         "mono": ["Fira Code", "monospace"],
-        "inter": ["Inter", "sans-serif"]
+        "inter": ["SF UI Text", "sans-serif"]
       }
     },
   },
