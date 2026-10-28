@@ -132,10 +132,10 @@ const Hero = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-serif text-[2rem] min-[420px]:text-[2.8rem] min-[520px]:text-[3.5rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] leading-[0.95] sm:leading-[0.85] tracking-tight text-[#111] dark:text-[#FDFBF7] mb-4 sm:mb-8 break-words"
+          className="font-serif text-[2rem] min-[420px]:text-[2.8rem] min-[520px]:text-[3.5rem] sm:text-[clamp(3rem,calc(10vw-12px),8rem)] leading-[0.95] sm:leading-[0.85] tracking-tight text-[#111] dark:text-[#FDFBF7] mb-4 sm:mb-8 break-words"
         >
-          <span className="block">Facundo Nicolás</span>{' '}
-          <span className="block italic font-normal text-[#D90429]">Triberti</span>
+          <span className="block sm:inline">Nicolás</span>{' '}
+          <span className="block sm:inline italic font-normal text-[#D90429]">Triberti</span>
         </motion.h1>
 
         {/* Separator */}
