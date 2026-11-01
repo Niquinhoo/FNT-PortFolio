@@ -1,36 +1,61 @@
 import React from 'react';
-import { Server, Cloud, Workflow, Bot, Layout, Check } from 'lucide-react';
+import { Server, Cloud, Gauge, Bot, Layout, Check } from 'lucide-react';
 import AnimatedContent from './AnimatedContent';
 import { technologies } from '../data/technologies';
 
 const skills = [
   {
     id: 'backend', index: '01', icon: Server, title: 'Backend', accent: 'y datos',
-    description: 'APIs REST, lógica de negocio, transacciones y consistencia de datos con idempotencia.',
+    description: 'Lógica de negocio donde hay plata en juego: cobros, caja, stock y órdenes que no pueden quedar a medias.',
+    capabilities: [
+      { text: 'Modelo transaccional para reparaciones, caja, inventario, ventas y garantías', projects: ['EnergyCell'] },
+      { text: 'Integración de pagos con Mercado Pago y confirmación de órdenes', projects: ['Calma'] },
+      { text: 'APIs REST con Node.js y Express sobre MySQL y TiDB', projects: ['Citax', 'Courtix'] },
+    ],
     items: technologies.backend,
     span: 'lg:col-span-7', visual: 'terminal',
   },
   {
     id: 'infra', index: '02', icon: Cloud, title: 'Cloud e', accent: 'infraestructura',
-    description: 'Despliegues y contenedores, almacenamiento y operación sobre Linux.',
+    description: 'Edge y serverless sobre Cloudflare; contenedores donde hacen falta.',
+    capabilities: [
+      { text: 'Migración de Vercel y Cloudinary a Workers, D1 y R2', projects: ['Calma'] },
+      { text: 'Backend serverless en Workers con TiDB y archivos en R2', projects: ['EnergyCell'] },
+      { text: 'Despliegues de API y servicios con Docker', projects: ['Citax'] },
+    ],
     items: technologies.cloud,
     span: 'lg:col-span-5', visual: 'nodes',
   },
   {
-    id: 'devops', index: '03', icon: Workflow, title: 'DevOps y', accent: 'calidad',
-    description: 'Pipelines de CI/CD, pruebas automatizadas, observabilidad y diagnóstico de incidentes.',
-    items: technologies.devops,
+    id: 'performance', index: '03', icon: Gauge, title: 'Rendimiento y', accent: 'diagnóstico',
+    description: 'Encontrar por qué algo es lento o se corta, corregirlo y comprobar el resultado.',
+    capabilities: [
+      { text: 'Optimización de consultas SQL y operaciones transaccionales', projects: ['EnergyCell'] },
+      { text: 'Diagnóstico de límites de CPU y tiempo de ejecución en Workers', projects: ['EnergyCell'] },
+      { text: 'Menos trabajo de videos y animaciones en el navegador', projects: ['Este portfolio'] },
+    ],
+    items: technologies.performance,
     span: 'lg:col-span-5', visual: 'pipeline',
   },
   {
     id: 'automation', index: '04', icon: Bot, title: 'Automatización', accent: 'e IA',
-    description: 'Agentes conversacionales, webhooks y tareas programadas integradas con mensajería.',
+    description: 'Agentes que atienden por WhatsApp y procesos que corren solos.',
+    capabilities: [
+      { text: 'Agente conversacional con LangGraph que reserva turnos por WhatsApp', projects: ['Citax'] },
+      { text: 'Webhooks y recordatorios automáticos de turnos', projects: ['Citax', 'Courtix'] },
+      { text: 'Reservas y pagos automatizados para complejos deportivos', projects: ['Courtix'] },
+    ],
     items: technologies.automation,
     span: 'lg:col-span-7', visual: 'chat',
   },
 ];
 
 const frontend = technologies.frontend;
+const frontendCapabilities = [
+  { text: 'Landings de captación con formulario de evaluación de clientes', projects: ['Osadía', 'LaunchUI'] },
+  { text: 'Animaciones con GSAP cuidando el rendimiento', projects: ['Osadía', 'Este portfolio'] },
+  { text: 'Paneles de gestión con React y TypeScript', projects: ['EnergyCell'] },
+];
 const totalTech = skills.reduce((total, skill) => total + skill.items.length, 0) + frontend.length;
 
 const TerminalVisual = () => (
@@ -55,9 +80,9 @@ const NodesVisual = () => (
       </g>
       {[
         { x: 8, y: 44, w: 70, label: 'Client' },
-        { x: 138, y: 44, w: 84, label: 'Linux', primary: true },
-        { x: 278, y: 14, w: 74, label: 'App' },
-        { x: 278, y: 78, w: 74, label: 'Datos' },
+        { x: 138, y: 44, w: 84, label: 'Workers', primary: true },
+        { x: 278, y: 14, w: 74, label: 'D1/TiDB' },
+        { x: 278, y: 78, w: 74, label: 'R2' },
       ].map((node) => (
         <g key={node.label}>
           <rect x={node.x} y={node.y} width={node.w} height="32" rx="6" fill={node.primary ? 'var(--primary-container)' : 'var(--surface-bright)'} stroke={node.primary ? 'var(--primary)' : 'var(--blueprint-stroke)'} strokeWidth="1" />
@@ -72,7 +97,7 @@ const NodesVisual = () => (
 const PipelineVisual = () => (
   <div className="rounded-xl border border-outline bg-surface-dim/60 px-3 sm:px-5 py-5" aria-hidden="true">
     <div className="flex items-center">
-      {['commit', 'lint', 'test', 'build', 'deploy'].map((step, index, steps) => {
+      {['medir', 'aislar', 'ajustar', 'deploy', 'verificar'].map((step, index, steps) => {
         const last = index === steps.length - 1;
         return (
           <React.Fragment key={step}>
@@ -104,6 +129,22 @@ const Chip = ({ children }) => (
   <span className="relative inline-flex items-center gap-2 overflow-hidden rounded-md border border-outline bg-surface px-3 py-1.5 font-mono text-[13px] tracking-tight text-on-surface-variant transition-colors duration-300 hover:border-primary/40 hover:text-on-surface cursor-default">
     {children}
   </span>
+);
+
+const Capabilities = ({ items, className }) => (
+  <ul className={`relative ${className}`}>
+    {items.map(({ text, projects }) => (
+      <li key={text} className="flex gap-3">
+        <Check className="w-4 h-4 mt-0.5 shrink-0 text-primary" strokeWidth={2.5} aria-hidden="true" />
+        <span className="min-w-0">
+          <span className="block text-[15px] leading-snug text-on-surface">{text}</span>
+          <span className="block mt-1 text-xs text-on-surface-variant">
+            Visto en <span className="text-primary font-medium">{projects.join(' · ')}</span>
+          </span>
+        </span>
+      </li>
+    ))}
+  </ul>
 );
 
 const Corners = () => (
@@ -219,7 +260,7 @@ const TechStack = () => {
         </AnimatedContent>
         <div className="grid grid-cols-1 grid-flow-dense lg:grid-cols-12 gap-5">
         {skills.map((skill) => {
-          const { id, index, icon: Icon, title, accent, description, items, span, visual } = skill;
+          const { id, index, icon: Icon, title, accent, description, capabilities, items, span, visual } = skill;
           const Visual = visuals[visual];
           return (
             <AnimatedContent key={id} distance={40} className={`min-w-0 ${span}`}>
@@ -238,7 +279,8 @@ const TechStack = () => {
                 {title}{' '}<span className="italic font-serif font-normal text-primary">{accent}</span>
               </h3>
               <p className="relative mt-3 text-sm leading-relaxed text-on-surface-variant max-w-md">{description}</p>
-              <div className="relative mt-7"><Visual /></div>
+              <Capabilities items={capabilities} className="mt-7 space-y-3.5" />
+              <div className="relative mt-auto pt-7"><Visual /></div>
               <div className="relative mt-7 flex flex-wrap gap-2 pt-6 sm:pt-7 border-t border-dashed border-outline">
                 {items.map((tech) => <Chip key={tech}>{tech}</Chip>)}
               </div>
@@ -258,6 +300,7 @@ const TechStack = () => {
               {frontend.map((tech) => <Chip key={tech}>{tech}</Chip>)}
             </div>
           </div>
+          <Capabilities items={frontendCapabilities} className="grid gap-y-3.5 gap-x-8 md:grid-cols-3" />
           <FrontendVisual />
         </article>
         </AnimatedContent>

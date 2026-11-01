@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { Bot, ChartNoAxesCombined, FlaskConical, ListChecks, Network, Pause, Play, Webhook, Workflow, Zap } from 'lucide-react';
-import { FaAws } from 'react-icons/fa';
-import { GrOracle } from 'react-icons/gr';
+import { Network, Pause, Play, Webhook } from 'lucide-react';
 import {
-  SiCloudflare, SiCloudflareworkers, SiDocker, SiExpress, SiGit, SiGithubactions, SiJavascript,
-  SiLinux, SiMysql, SiNodedotjs, SiPostgresql, SiPrisma, SiReact,
-  SiTailwindcss, SiTidb, SiTypescript, SiVite, SiVultr, SiWhatsapp
+  SiCloudflare, SiCloudflareworkers, SiDocker, SiExpress, SiGit, SiGooglechrome, SiGsap, SiJavascript,
+  SiLangchain, SiLanggraph, SiLinux, SiMercadopago, SiMysql, SiNodedotjs, SiPostgresql, SiReact,
+  SiTailwindcss, SiTidb, SiTypescript, SiVite, SiWhatsapp
 } from 'react-icons/si';
 import { technologies } from '../data/technologies';
 import LogoLoop from './LogoLoop';
@@ -16,31 +14,26 @@ const icons = {
   JavaScript: [SiJavascript, '#F7DF1E'],
   Express: [SiExpress, '#888888'],
   'APIs REST': [Network],
-  Prisma: [SiPrisma, '#5A67D8'],
-  PostgreSQL: [SiPostgresql, '#4169E1'],
   MySQL: [SiMysql, '#4479A1'],
   TiDB: [SiTidb, '#ED1944'],
-  'Cloudflare D1': [SiCloudflare, '#F38020'],
+  PostgreSQL: [SiPostgresql, '#4169E1'],
+  'Mercado Pago': [SiMercadopago, '#00B1EA'],
   'Cloudflare Workers': [SiCloudflareworkers, '#F38020'],
+  'Cloudflare D1': [SiCloudflare, '#F38020'],
   'Cloudflare R2': [SiCloudflare, '#F38020'],
   Docker: [SiDocker, '#2496ED'],
   Linux: [SiLinux, '#FCC624'],
-  'AWS EC2/S3': [FaAws, '#FF9900'],
-  'VULTR Cloud Compute': [SiVultr, '#007BFC'],
-  'Oracle OCI': [GrOracle, '#F80000'],
   Git: [SiGit, '#F05032'],
-  'GitHub Actions': [SiGithubactions, '#2088FF'],
-  'CI/CD': [Workflow],
-  Testing: [FlaskConical],
-  Linting: [ListChecks],
-  Observabilidad: [ChartNoAxesCombined],
+  Wrangler: [SiCloudflare, '#F38020'],
+  'Chrome DevTools': [SiGooglechrome, '#4285F4'],
+  LangGraph: [SiLanggraph, '#1C3C3C'],
+  LangChain: [SiLangchain, '#1C3C3C'],
+  'WhatsApp Business API': [SiWhatsapp, '#25D366'],
   Webhooks: [Webhook],
-  'WhatsApp APIs': [SiWhatsapp, '#25D366'],
-  'Modelos de IA': [Bot],
-  Automatizaciones: [Zap],
   React: [SiReact, '#61DAFB'],
   Vite: [SiVite, '#646CFF'],
-  'Tailwind CSS': [SiTailwindcss, '#06B6D4']
+  'Tailwind CSS': [SiTailwindcss, '#06B6D4'],
+  GSAP: [SiGsap, '#88CE02']
 };
 
 const logos = Object.values(technologies).flat().map((title) => {
