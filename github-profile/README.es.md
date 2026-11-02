@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <a href="https://niquinhoo.github.io/FNT-PortFolio/#work"><img src="portfolio-projects-button-compact.svg" alt="Ver proyectos" height="48" /></a>
+  <a href="https://niquinhoo.github.io/FNT-PortFolio/#work"><img src="portfolio-projects-button-compact.svg?v=2" alt="Ver proyectos" height="48" /></a>
 </p>
 
 <p align="center">
@@ -103,5 +103,5 @@ SaaS que permite a los negocios gestionar sus turnos directamente desde WhatsApp
 
 <p align="center">
   <i>Del primer endpoint al último deploy: soluciones completas para entornos reales.</i><br /><br />
-  <a href="https://niquinhoo.github.io/FNT-PortFolio/#work"><img src="portfolio-projects-button-compact.svg" alt="Ver proyectos" height="48" /></a>
+  <a href="https://niquinhoo.github.io/FNT-PortFolio/#work"><img src="portfolio-projects-button-compact.svg?v=2" alt="Ver proyectos" height="48" /></a>
 </p>

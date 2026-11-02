@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <a href="https://niquinhoo.github.io/FNT-PortFolio/#work"><img src="portfolio-projects-button-compact.en.svg" alt="View projects" height="48" /></a>
+  <a href="https://niquinhoo.github.io/FNT-PortFolio/#work"><img src="portfolio-projects-button-compact.en.svg?v=2" alt="View projects" height="48" /></a>
 </p>
 
 <p align="center">
@@ -103,5 +103,5 @@ A SaaS platform that lets businesses manage appointments straight from WhatsApp.
 
 <p align="center">
   <i>From the first endpoint to the last deploy — complete solutions for real-world use.</i><br /><br />
-  <a href="https://niquinhoo.github.io/FNT-PortFolio/#work"><img src="portfolio-projects-button-compact.en.svg" alt="View projects" height="48" /></a>
+  <a href="https://niquinhoo.github.io/FNT-PortFolio/#work"><img src="portfolio-projects-button-compact.en.svg?v=2" alt="View projects" height="48" /></a>
 </p>
