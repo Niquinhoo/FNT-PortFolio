@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="48" viewBox="0 0 150 48" role="img" aria-labelledby="title">
+  <title id="title">PORTFOLIO</title>
+  <style>
+    .dot { animation: blink 2.4s ease-in-out 0s infinite; }
+    @keyframes blink { 50% { opacity: .25; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <rect x="1" y="1" width="148" height="46" rx="12" fill="#FBFBFA" stroke="#D90429" stroke-opacity=".55" stroke-width="2"/>
+  <circle class="dot" cx="22" cy="24" r="4" fill="#D90429"/>
+  <text x="85" y="29" fill="#111111" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="700" letter-spacing="2" text-anchor="middle">PORTFOLIO</text>
+</svg>

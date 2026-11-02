@@ -1,23 +1,72 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
   <title id="title">Nicolás Triberti — Full Stack Developer</title>
-  <desc id="desc">Nicolás Triberti: Backend, Cloud y Automation. Una órbita y pulsos suaves representan ciclos de automatización.</desc>
+  <desc id="desc">Nicolás Triberti: Backend, Cloud y Automation. Un núcleo envía pulsos de datos a nodos API, Cloud y AI, representando ciclos de automatización.</desc>
   <style>
-    .orbit { animation: orbit 24s linear infinite; }
+    text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .serif { font-family: Georgia, 'Times New Roman', serif; }
+
+    /* intro (runs once) */
+    .in { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+    .d1 { animation-delay: .15s; } .d2 { animation-delay: .4s; } .d3 { animation-delay: .7s; }
+    .d4 { animation-delay: 1s; } .d5 { animation-delay: 1.3s; }
+    .rule { transform-box: fill-box; transform-origin: left center; animation: draw .8s 1s cubic-bezier(.6,0,.2,1) both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+    @keyframes draw { from { transform: scaleX(0); } }
+
+    /* tagline words take turns in red */
+    .w { fill: #787774; animation: word 9s 2s infinite; }
+    .w2 { animation-delay: 5s; } .w3 { animation-delay: 8s; }
+    @keyframes word { 0%, 30% { fill: #D90429; } 36%, 100% { fill: #787774; } }
+
+    /* terminal footer */
+    .ph { animation: phrase 12s 1.6s infinite both; }
+    .ph2 { animation-delay: 5.6s; } .ph3 { animation-delay: 9.6s; }
+    @keyframes phrase {
+      0% { opacity: 0; transform: translateY(10px); }
+      4%, 29% { opacity: 1; transform: translateY(0); }
+      33%, 100% { opacity: 0; transform: translateY(-10px); }
+    }
+    .blink { animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* orbit system */
+    .spin { animation: spin 16s linear infinite; }
+    .spin-slow { animation: spin 60s linear infinite; }
+    .spin-rev { animation: spin 28s linear infinite reverse; }
+    .spin-rev-slow { animation: spin 90s linear infinite reverse; }
+    .radar { animation: spin 8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
     .pulse { animation: pulse 6s ease-out infinite; }
     .pulse-delayed { animation-delay: -3s; }
+    @keyframes pulse { from { transform: scale(1); opacity: .3; } to { transform: scale(2); opacity: 0; } }
     .core { animation: heartbeat 3s ease-in-out infinite; }
-    @keyframes orbit { to { transform: rotate(360deg); } }
-    @keyframes pulse {
-      from { transform: scale(1); opacity: .24; }
-      to { transform: scale(2.04545); opacity: 0; }
+    @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.18); } }
+
+    /* data packets: core -> node, then node pings and its label lights up */
+    .pkt { opacity: 0; animation: pkt 6s cubic-bezier(.5,0,.5,1) infinite; }
+    .ping { opacity: 0; animation: ping 6s ease-out infinite; }
+    .lbl { fill: #787774; animation: lbl 6s infinite; }
+    .n2 { animation-delay: 2s; } .n3 { animation-delay: 4s; }
+    @keyframes pkt {
+      0% { opacity: 0; transform: translateX(14px); }
+      4% { opacity: 1; }
+      28% { opacity: 1; transform: translateX(200px); }
+      32%, 100% { opacity: 0; transform: translateX(200px); }
     }
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.12); opacity: .75; }
+    @keyframes ping {
+      0%, 27% { opacity: 0; transform: scale(1); }
+      29% { opacity: .7; transform: scale(1); }
+      55%, 100% { opacity: 0; transform: scale(3.2); }
     }
+    @keyframes lbl { 0%, 27% { fill: #787774; } 30%, 50% { fill: #D90429; } 60%, 100% { fill: #787774; } }
+
+    .spark { animation: blink-soft 4s ease-in-out infinite; }
+    .s2 { animation-delay: -1s; } .s3 { animation-delay: -2s; } .s4 { animation-delay: -3s; } .s5 { animation-delay: -1.6s; }
+    @keyframes blink-soft { 0%, 100% { opacity: 0; } 50% { opacity: .8; } }
+
     @media (prefers-reduced-motion: reduce) {
-      .orbit, .pulse, .core { animation: none; }
-      .pulse { opacity: 0; }
+      * { animation: none !important; }
+      .pulse, .pkt, .ping, .ph2, .ph3, .radar { opacity: 0; }
     }
   </style>
   <defs>
@@ -28,30 +77,102 @@
       <stop offset="0" stop-color="#FBFBFA"/>
       <stop offset="1" stop-color="#F2F2F0"/>
     </linearGradient>
+    <linearGradient id="sweep" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#D90429" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#D90429" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#D90429" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#D90429" stop-opacity="0"/>
+    </radialGradient>
   </defs>
+
+  <!-- canvas -->
   <rect width="1280" height="640" fill="url(#fade)"/>
   <rect width="1280" height="640" fill="url(#grid)"/>
   <path d="M0 560H1280" stroke="#111111" stroke-opacity=".12"/>
   <path d="M56 0V640M1224 0V640" stroke="#111111" stroke-opacity=".08"/>
-  <circle cx="1050" cy="310" r="180" fill="none" stroke="#D90429" stroke-opacity=".12" stroke-width="1"/>
-  <circle cx="1050" cy="310" r="134" fill="none" stroke="#D90429" stroke-opacity=".2" stroke-width="1"/>
-  <circle cx="1050" cy="310" r="88" fill="#FDEBEC" stroke="#D90429" stroke-opacity=".35" stroke-width="1"/>
-  <g transform="translate(1050 310)">
-    <g fill="none" stroke="#D90429" stroke-width="1">
-      <circle class="pulse" r="88" opacity="0"/>
-      <circle class="pulse pulse-delayed" r="88" opacity="0"/>
-    </g>
-    <g class="orbit">
-      <path d="M0-134A134 134 0 0 1 134 0" fill="none" stroke="#D90429" stroke-opacity=".45" stroke-width="1.5" stroke-linecap="round"/>
-      <circle cy="-134" r="4" fill="#D90429"/>
-    </g>
-    <circle class="core" r="9" fill="#D90429"/>
+  <g fill="#D90429">
+    <rect class="spark" x="190" y="94" width="4" height="4"/>
+    <rect class="spark s2" x="542" y="94" width="4" height="4"/>
+    <rect class="spark s3" x="318" y="510" width="4" height="4"/>
+    <rect class="spark s4" x="702" y="510" width="4" height="4"/>
+    <rect class="spark s5" x="798" y="62" width="4" height="4"/>
   </g>
-  <path d="M870 310h-44m404 0h44M1050 130V82m0 456v-48" stroke="#D90429" stroke-opacity=".35" stroke-width="1"/>
-  <circle cx="826" cy="310" r="4" fill="#D90429"/>
-  <circle cx="1274" cy="310" r="4" fill="#D90429"/>
-  <text x="96" y="174" fill="#D90429" font-family="monospace, sans-serif" font-size="30" letter-spacing="4">FULL STACK DEVELOPER · ARGENTINA</text>
-  <text x="92" y="340" fill="#111111" font-family="Georgia, 'Times New Roman', serif" font-size="100" letter-spacing="-3">Nicolás <tspan fill="#D90429" font-style="italic">Triberti</tspan></text>
-  <path d="M96 394h92" stroke="#D90429" stroke-width="3"/>
-  <text x="96" y="476" fill="#787774" font-family="monospace, sans-serif" font-size="32" letter-spacing="2">BACKEND / CLOUD / AUTOMATION</text>
+
+  <!-- orbit system -->
+  <circle cx="1050" cy="300" r="240" fill="url(#glow)"/>
+  <path d="M850 300h-40M1250 300h24M1050 100V64M1050 500v40" stroke="#D90429" stroke-opacity=".35" stroke-width="1"/>
+  <circle cx="810" cy="300" r="4" fill="#D90429"/>
+  <circle cx="1050" cy="540" r="4" fill="#D90429"/>
+  <g transform="translate(1050 300)">
+    <circle class="spin-rev-slow" r="222" fill="none" stroke="#D90429" stroke-opacity=".3" stroke-width="8" stroke-dasharray="1.5 56.6"/>
+    <circle r="200" fill="none" stroke="#D90429" stroke-opacity=".14" stroke-width="1"/>
+    <circle class="spin-slow" r="178" fill="none" stroke="#D90429" stroke-opacity=".28" stroke-width="1" stroke-dasharray="2 10"/>
+    <circle r="156" fill="none" stroke="#D90429" stroke-opacity=".2" stroke-width="1"/>
+    <g class="radar"><path d="M0 0L200 0A200 200 0 0 0 173.2-100Z" fill="url(#sweep)"/></g>
+
+    <!-- spokes to nodes -->
+    <g stroke="#D90429" stroke-opacity=".18" stroke-width="1" stroke-dasharray="3 5">
+      <path d="M0 0L-188-68.4M0 0L114.7-163.8M0 0L68.4 187.9"/>
+    </g>
+
+    <circle r="100" fill="#FDEBEC" stroke="#D90429" stroke-opacity=".35" stroke-width="1"/>
+    <g fill="none" stroke="#D90429" stroke-width="1">
+      <circle class="pulse" r="100" opacity="0"/>
+      <circle class="pulse pulse-delayed" r="100" opacity="0"/>
+    </g>
+
+    <g class="spin">
+      <path d="M0-156A156 156 0 0 1 156 0" fill="none" stroke="#D90429" stroke-opacity=".5" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cy="-156" r="4.5" fill="#D90429"/>
+    </g>
+    <g class="spin-rev">
+      <circle cy="200" r="3" fill="#D90429" fill-opacity=".7"/>
+    </g>
+
+    <!-- packets -->
+    <g fill="#D90429">
+      <g transform="rotate(200)"><circle class="pkt" r="3.5"/></g>
+      <g transform="rotate(-55)"><circle class="pkt n2" r="3.5"/></g>
+      <g transform="rotate(70)"><circle class="pkt n3" r="3.5"/></g>
+    </g>
+
+    <!-- nodes -->
+    <g transform="translate(-188 -68.4)">
+      <circle class="ping" r="6" fill="none" stroke="#D90429"/>
+      <circle r="6" fill="#FBFBFA" stroke="#D90429" stroke-width="2"/>
+      <text class="lbl" x="-18" y="5" font-size="16" letter-spacing="2" text-anchor="end">API</text>
+    </g>
+    <g transform="translate(114.7 -163.8)">
+      <circle class="ping n2" r="6" fill="none" stroke="#D90429"/>
+      <circle r="6" fill="#FBFBFA" stroke="#D90429" stroke-width="2"/>
+      <text class="lbl n2" x="18" y="-8" font-size="16" letter-spacing="2">CLOUD</text>
+    </g>
+    <g transform="translate(68.4 187.9)">
+      <circle class="ping n3" r="6" fill="none" stroke="#D90429"/>
+      <circle r="6" fill="#FBFBFA" stroke="#D90429" stroke-width="2"/>
+      <text class="lbl n3" x="18" y="20" font-size="16" letter-spacing="2">AI</text>
+    </g>
+
+    <circle r="24" fill="none" stroke="#D90429" stroke-opacity=".4" stroke-width="1"/>
+    <circle class="core" r="10" fill="#D90429"/>
+  </g>
+
+  <!-- headline -->
+  <text class="in d1" x="96" y="170" fill="#D90429" font-size="28" letter-spacing="5">FULL STACK DEVELOPER · ARGENTINA</text>
+  <g class="in d2">
+    <text class="serif" x="92" y="330" fill="#111111" font-size="104" letter-spacing="-3">Nicolás <tspan fill="#D90429" font-style="italic">Triberti</tspan></text>
+  </g>
+  <path class="rule" d="M96 384h110" stroke="#D90429" stroke-width="3"/>
+  <text class="in d4" x="96" y="456" font-size="30" letter-spacing="3"><tspan class="w">BACKEND</tspan><tspan fill="#C9C8C4"> / </tspan><tspan class="w w2">CLOUD</tspan><tspan fill="#C9C8C4"> / </tspan><tspan class="w w3">AUTOMATION</tspan></text>
+
+  <!-- terminal footer -->
+  <circle class="blink" cx="104" cy="601" r="5" fill="#D90429"/>
+  <g font-size="20" fill="#111111" letter-spacing="1">
+    <text class="ph" x="124" y="608"><tspan fill="#D90429">&gt;</tspan> designing APIs that scale<tspan class="blink" fill="#D90429">_</tspan></text>
+    <text class="ph ph2" x="124" y="608"><tspan fill="#D90429">&gt;</tspan> shipping to the cloud with Docker<tspan class="blink" fill="#D90429">_</tspan></text>
+    <text class="ph ph3" x="124" y="608"><tspan fill="#D90429">&gt;</tspan> automating real work with AI agents<tspan class="blink" fill="#D90429">_</tspan></text>
+  </g>
+  <text class="in d5" x="1184" y="608" fill="#787774" font-size="18" letter-spacing="2" text-anchor="end">NIQUINHOO.GITHUB.IO</text>
 </svg>

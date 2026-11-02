@@ -2,43 +2,66 @@
   <a href="README.md">English</a> · <strong>Español</strong>
 </p>
 
-<div align="center">
-  <img src="https://raw.githubusercontent.com/Niquinhoo/Niquinhoo/a4b9a81ac8ce1d7d78cc1279049185c4161e6988/banner-profile.svg" alt="Nicolás Triberti — Full Stack Developer" width="100%" />
-</div>
+<p align="center">
+  <img src="banner-profile.svg" alt="Nicolás Triberti — Desarrollador Full Stack · Backend / Cloud / Automatización" width="100%" />
+</p>
 
-<h1 align="center">Hola, soy Nicolás Triberti<br /></h1>
+<h1 align="center">Hola, soy Nicolás Triberti</h1>
 
 <p align="center">
-  Desarrollador Full Stack de Argentina, estudiante avanzado de Programación Universitaria de Sistemas, con 2+ años de experiencia y foco en backend, infraestructura cloud y automatización.
+  Desarrollador Full Stack de Argentina. Construyo backends, infraestructura cloud y automatizaciones con IA que funcionan en producción, no solo en demos.<br />
+  Más de 2 años de experiencia práctica · Estudiante avanzado de Programación Universitaria de Sistemas.
 </p>
 
 <p align="center">
-  <a href="https://niquinhoo.github.io/FNT-PortFolio/">Portfolio</a> ·
-  <a href="mailto:nicotrib699@gmail.com">Email</a> ·
-  <a href="https://www.linkedin.com/in/nicolas-triberti-224651247/">linkedin.com/in/nicolastriberti</a>
+  <a href="https://niquinhoo.github.io/FNT-PortFolio/#work"><img src="portfolio-projects-button-compact.svg" alt="Ver proyectos" height="48" /></a>
 </p>
 
 <p align="center">
-  <a href="https://niquinhoo.github.io/FNT-PortFolio/#work">
-    <img src="portfolio-projects-button-compact.svg" alt="Ver proyectos" width="300" />
-  </a>
+  <a href="https://niquinhoo.github.io/FNT-PortFolio/"><img src="button-portfolio.svg" alt="Portfolio" height="48" /></a>
+  <a href="https://www.linkedin.com/in/nicolas-triberti-224651247/"><img src="button-linkedin.svg" alt="LinkedIn" height="48" /></a>
+  <a href="mailto:nicotrib699@gmail.com"><img src="button-email.svg" alt="Email" height="48" /></a>
 </p>
 
 <p align="center">
-  <img src="https://ghchart.rshah.org/D90429/Niquinhoo" alt="Calendario anual de contribuciones de GitHub de Niquinhoo" width="100%" />
+  <img src="https://ghchart.rshah.org/D90429/Niquinhoo" alt="Contribuciones de GitHub de Niquinhoo en el último año" width="100%" />
 </p>
 
-## Sobre mí
+## Qué hago
 
-Construyo soluciones completas para entornos reales: diseño APIs, integro servicios, modelo datos y preparo despliegues confiables. También desarrollo flujos agénticos para automatizar tareas de negocio.
+<table>
+  <tr>
+    <td width="33%" valign="top">
+      <b>Backend</b><br />
+      APIs pensadas para durar: contratos claros, modelos de datos sólidos e integraciones con servicios externos.
+    </td>
+    <td width="33%" valign="top">
+      <b>Cloud</b><br />
+      Despliegues confiables y containerizados en AWS, Oracle OCI, Google Cloud, Vultr y Cloudflare.
+    </td>
+    <td width="33%" valign="top">
+      <b>Automatización</b><br />
+      Flujos agénticos que liberan a las personas de las tareas repetitivas del negocio.
+    </td>
+  </tr>
+</table>
 
 ## Proyecto destacado
 
-### [Citax](https://www.citax.com.ar/)
+### [Citax](https://www.citax.com.ar/) — turnos en piloto automático por WhatsApp
 
-SaaS de gestión de turnos por WhatsApp. Desarrollé e integré su API, procesos automatizados y servicios de IA, con despliegues en Docker. Sus agentes han procesado **más de 1.000 turnos de manera agéntica**.
+SaaS que permite a los negocios gestionar sus turnos directamente desde WhatsApp. Desarrollé e integré su API, los procesos automatizados y los servicios de IA, todo desplegado con Docker.
 
-Node.js · Express · MySQL / TiDB · WhatsApp Business API · LangGraph · LangChain · React · Docker
+> **Más de 1.000 turnos** gestionados de forma autónoma por sus agentes de IA.
+
+- **API e integraciones** — backend en Node.js / Express conectado a la WhatsApp Business API.
+- **Agentes de IA** — flujos conversacionales construidos con LangGraph y LangChain.
+- **Datos** — MySQL / TiDB como fuente de verdad de agendas y reservas.
+- **Entrega** — despliegues containerizados con Docker.
+
+<p>
+  <code>Node.js</code> <code>Express</code> <code>MySQL / TiDB</code> <code>WhatsApp Business API</code> <code>LangGraph</code> <code>LangChain</code> <code>React</code> <code>Docker</code>
+</p>
 
 <table>
   <tr>
@@ -49,24 +72,36 @@ Node.js · Express · MySQL / TiDB · WhatsApp Business API · LangGraph · Lang
 
 ## Tecnologías
 
-**Backend y datos**  
-TypeScript · JavaScript · Python · Rust · Java Spring · APIs REST · Prisma · PostgreSQL · MySQL · TiDB · Cloudflare D1
-
-**Cloud e infraestructura**  
- Docker · Linux · AWS EC2 / S3 · VULTR Cloud Compute · Oracle OCI · Google Compute Engine VM's · Cloudflare Workers / R2 
-
-**DevOps y calidad**  
-Git · GitHub Actions · CI/CD · Testing · Linting · Observabilidad ·  
-
-**Automatización e IA**  
-hatsApp APIs · Cloud/Embedded LLMs · Automatizaciones · Webhooks 
-
-**Frontend**  
-React · React Native · Vite · Tailwind CSS · GSAP
-
-**Integraciones y visualización**  
-Mercado Pago · Gmail · Google Earth
+<table>
+  <tr>
+    <td><b>Backend y datos</b></td>
+    <td>TypeScript · JavaScript · Python · Rust · Java Spring · APIs REST · Prisma · PostgreSQL · MySQL · TiDB · Cloudflare D1</td>
+  </tr>
+  <tr>
+    <td><b>Cloud e infraestructura</b></td>
+    <td>Docker · Linux · AWS EC2 / S3 · Vultr Cloud Compute · Oracle OCI · Google Compute Engine · Cloudflare Workers / R2</td>
+  </tr>
+  <tr>
+    <td><b>DevOps y calidad</b></td>
+    <td>Git · GitHub Actions · CI/CD · Testing · Linting · Observabilidad</td>
+  </tr>
+  <tr>
+    <td><b>Automatización e IA</b></td>
+    <td>WhatsApp APIs · LLMs cloud y embebidos · LangGraph · LangChain · Webhooks</td>
+  </tr>
+  <tr>
+    <td><b>Frontend</b></td>
+    <td>React · React Native · Vite · Tailwind CSS · GSAP</td>
+  </tr>
+  <tr>
+    <td><b>Integraciones</b></td>
+    <td>Mercado Pago · Gmail · Google Earth</td>
+  </tr>
+</table>
 
 ---
 
-<p align="center"><i>Desarrollando soluciones completas para entornos reales.</i></p>
+<p align="center">
+  <i>Del primer endpoint al último deploy: soluciones completas para entornos reales.</i><br /><br />
+  <a href="https://niquinhoo.github.io/FNT-PortFolio/#work"><img src="portfolio-projects-button-compact.svg" alt="Ver proyectos" height="48" /></a>
+</p>
