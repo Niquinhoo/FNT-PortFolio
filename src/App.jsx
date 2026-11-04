@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import Lenis from 'lenis';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from './components/Navbar';
@@ -14,9 +14,6 @@ import Footer from './components/Footer';
 import CursorGrid from './components/CursorGrid';
 
 function App() {
-  const lenisRef = useRef(null);
-  const handleModalChange = useCallback((isOpen) => lenisRef.current?.[isOpen ? 'stop' : 'start'](), []);
-
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.8,
@@ -30,7 +27,6 @@ function App() {
       autoRaf: true,
     });
     lenis.on('scroll', ScrollTrigger.update);
-    lenisRef.current = lenis;
 
     if (window.location.hash === '#work') {
       const target = document.querySelector('#work');
@@ -38,7 +34,6 @@ function App() {
     }
 
     return () => {
-      lenisRef.current = null;
       lenis.off('scroll', ScrollTrigger.update);
       lenis.destroy();
     };
@@ -65,7 +60,7 @@ function App() {
         <Navbar />
         <Hero />
         <About />
-        <Projects onModalChange={handleModalChange} />
+        <Projects />
         <TechnologyLoop />
         <TechStack />
         <Contact />
